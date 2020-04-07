@@ -191,15 +191,28 @@
         </header>
 
         <div class="post-content">
-            <p><em>This post assumes that you already have a <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> account and have git already downloaded.</em></p>
-<p><em>This tutorial is for anyone interested in using “github.io” as their website domain and harness the power of <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> for blogging purposes.</em> </p>
+            <p><em>This post assumes that you already have a <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> account and have git and <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a> already downloaded.</em></p>
+<p><em>This tutorial is for anyone interested in using “github.io” as their website domain and harnessing the power of <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> for blogging purposes.</em></p>
+<p><em>I had to go through several different tutorials before I managed to successfully deploy hexo to my website. No one tutorial was perfect for me so here I will share what worked for me. I used Windows 10 and the Git Bash terminal throughout the process.</em> </p>
 <h3 id="Step-1：-Make-a-new-GitHub-repository"><a href="#Step-1：-Make-a-new-GitHub-repository" class="headerlink" title="Step 1： Make a new GitHub repository"></a>Step 1： Make a new GitHub repository</h3><p>The format of the repo name is as follows:</p>
 <blockquote><p><em>username</em>.github.io</p>
 </blockquote>
 
 <p>Note that you should be able to create the repo as long as you do not have an existing repo of the same name. GitHub reserves the domain for your username. <em>Isn&#39;t that neat?</em></p>
-<p>Proceed with initializing the repo with a README and click <strong>Create repository</strong></p>
-<h3 id="Step-2-Install-Hexo"><a href="#Step-2-Install-Hexo" class="headerlink" title="Step 2: Install Hexo"></a>Step 2: Install Hexo</h3>
+<p>Proceed with initializing the repo with a README and click <strong>Create repository</strong>. Keep in mind the link to your repo.</p>
+<h3 id="Step-2-Install-Hexo"><a href="#Step-2-Install-Hexo" class="headerlink" title="Step 2: Install Hexo"></a>Step 2: Install Hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3-Initialize-a-folder-for-your-website-content"><a href="#Step-3-Initialize-a-folder-for-your-website-content" class="headerlink" title="Step 3: Initialize a folder for your website content"></a>Step 3: Initialize a folder for your website content</h3><p>In this example, I initialized a folder called “hexo” on my Desktop.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4-Edit-hexo-config-yml-to-direct-hexo-to-your-website"><a href="#Step-4-Edit-hexo-config-yml-to-direct-hexo-to-your-website" class="headerlink" title="Step 4: Edit hexo/_config.yml to direct hexo to your website"></a>Step 4: Edit hexo/_config.yml to direct hexo to your website</h3><p>This step is going to enable you to deploy hexo to your website. Open the config file with a text editor and edit the <strong>“URL”</strong> and <strong>“DEPLOYMENT”</strong> section and edit it as follows:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://username.github.io</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span> </span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/username/username.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-5-Deployment-test"><a href="#Step-5-Deployment-test" class="headerlink" title="Step 5: Deployment test"></a>Step 5: Deployment test</h3><p>It is a good idea to first attempt to publish the default content to your website and see if it works.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to view your website locally</span></span><br><span class="line">hexo s <span class="comment"># what you see at this point is what you would expect to see on your website after deployment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># to generate static files</span></span><br><span class="line">hexo g <span class="comment"># g for generate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># to deploy your folder to your website</span></span><br><span class="line">hexo d <span class="comment"># d for deploy</span></span><br></pre></td></tr></table></figure>
+<p>Now, go to <em>username</em>.github.io to see if it works! If it does, congratulations and go ahead and change things up such as changing the theme and adding posts.</p>
+<p>Have fun! :)</p>
+
         </div>
 
         
@@ -233,6 +246,10 @@
                     
                     
                         <a href="/tags/hexotutorial/"># hexotutorial</a>
+                    
+                        <a href="/tags/githubwithhexo/"># githubwithhexo</a>
+                    
+                        <a href="/tags/githexotutorial/"># githexotutorial</a>
                     
                         
                 </span>
