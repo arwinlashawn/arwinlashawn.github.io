@@ -12,7 +12,7 @@
 
 
 
-<title>Genesis | Projects</title>
+<title>Blog Setup Tutorial ft. GitHub and Hexo | Arwin&#39;s Blog | Projects</title>
 
 
 
@@ -49,7 +49,7 @@
         <header>
     <nav class="navbar">
         <div class="container">
-            <div class="navbar-header header-logo"><a href="/">Arwin&#39;s Blog</a></div>
+            <div class="navbar-header header-logo"><a href="/">Arwin&#39;s Blog | Projects</a></div>
             <div class="menu navbar-right">
                 
                     <a class="menu-item" href="/archives">Posts</a>
@@ -71,7 +71,7 @@
         <div class="container">
             <div class="navbar-header">
                 <div>
-                    <a href="/">Arwin&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                    <a href="/">Arwin&#39;s Blog | Projects</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
                 </div>
                 <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
             </div>
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Genesis</h1>
+            <h1 class="post-title">Blog Setup Tutorial ft. GitHub and Hexo</h1>
             
                 <div class="post-meta">
                     
@@ -120,7 +182,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 6, 2020&nbsp;&nbsp;23:36:52</a>
+                        Date: <a href="#">April 7, 2020&nbsp;&nbsp;2:37:23</a>
                         </span>
                     
                     
@@ -129,7 +191,15 @@
         </header>
 
         <div class="post-content">
-            
+            <p><em>This post assumes that you already have a <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> account and have git already downloaded.</em></p>
+<p><em>This tutorial is for anyone interested in using “github.io” as their website domain and harness the power of <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> for blogging purposes.</em> </p>
+<h3 id="Step-1：-Make-a-new-GitHub-repository"><a href="#Step-1：-Make-a-new-GitHub-repository" class="headerlink" title="Step 1： Make a new GitHub repository"></a>Step 1： Make a new GitHub repository</h3><p>The format of the repo name is as follows:</p>
+<blockquote><p><em>username</em>.github.io</p>
+</blockquote>
+
+<p>Note that you should be able to create the repo as long as you do not have an existing repo of the same name. GitHub reserves the domain for your username. <em>Isn&#39;t that neat?</em></p>
+<p>Proceed with initializing the repo with a README and click <strong>Create repository</strong></p>
+<h3 id="Step-2-Install-Hexo"><a href="#Step-2-Install-Hexo" class="headerlink" title="Step 2: Install Hexo"></a>Step 2: Install Hexo</h3>
         </div>
 
         
@@ -143,7 +213,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://arwinlashawn.github.io/2020/04/06/blog-genesis/">http://arwinlashawn.github.io/2020/04/06/blog-genesis/</a></span>
+                        <span><a href="http://arwinlashawn.github.io/2020/04/07/genesis/">http://arwinlashawn.github.io/2020/04/07/genesis/</a></span>
                     </p>
                 
                 
@@ -163,8 +233,6 @@
                     
                     
                         <a href="/tags/hexotutorial/"># hexotutorial</a>
-                    
-                        <a href="/tags/git-hexotutorial/"># git-hexotutorial</a>
                     
                         
                 </span>
