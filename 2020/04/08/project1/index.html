@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Arwin Lashawn">
+
+
+
+
+
+<title>i. identifying the source of virulence | Arwin&#39;s Blog | Projects</title>
+
+
+
+    <link rel="icon" href="/avatar1.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Arwin&#39;s Blog | Projects</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Arwin&#39;s Blog | Projects</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">i. identifying the source of virulence</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Arwin Lashawn</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 8, 2020&nbsp;&nbsp;0:48:58</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>Goal: To identify genes or genomic features of the virulent <em>Escherichia coli</em> O104:H4 strain TY-2482 that could have been responsible for its extreme virulence during the 2011 outbreak in Germany and France</strong></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Tool-chosen"><a href="#Tool-chosen" class="headerlink" title="Tool chosen"></a>Tool chosen</h3><p><strong><em>The Comprehensive Antibiotic Resistance Database/The Resistance Gene Identifier (CARD/RGI)</em></strong></p>
+<h3 id="Tool-description"><a href="#Tool-description" class="headerlink" title="Tool description"></a>Tool description</h3><p>The CARD is a rigorously curated <strong>database of characterized, peer-reviewed resistance determining genes and associated antibiotics</strong>, organized by the Antibiotic Resistance Ontology (ARO) and antimicrobial resistance (AMR) gene detection models. The CARD provides tools such as the RGI software which is capable of <strong>predicting resistomes from protein or nucleotide data based on homology and SNP models</strong>. The RGI utilizes reference data from the CARD.</p>
+<h3 id="How-CARD-RGI-works"><a href="#How-CARD-RGI-works" class="headerlink" title="How CARD/RGI works"></a>How CARD/RGI works</h3><p>For the purpose of this class, Dr. Runcie has already installed the tool on FARM. Therefore, only the few lines of code below are needed before running any RGI commands in Git Bash.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># request for required resources</span></span><br><span class="line">srun -p bit150 -t 4:00:00 --mem=16000 -n 2 -c 4 --pty bash -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># to load conda3 module</span></span><br><span class="line">module load conda3</span><br><span class="line"></span><br><span class="line"><span class="comment"># to activate the CARD environment</span></span><br><span class="line"><span class="built_in">source</span> activate CARD</span><br></pre></td></tr></table></figure>
+<p>Accepted input types: <strong>nucleotide or protein sequences</strong><br>Accepted formats: <strong>FASTA and gzip</strong><br><strong>RGI processes inputs differently depending on whether they are nucleotide or protein data</strong>.</p>
+<p><em>Option 1: Nucleotide sequence as input</em></p>
+<blockquote>
+<ul>
+<li>RGI first predicts complete open reading frames (ORF) by using <strong>Prodigal</strong> (ignores ORF below 30 bp) and analyzes predicted protein sequences</li>
+<li>This includes a secondary correction by RGI if Prodigal undercalls the correct start codon to ensure complete AMR genes are predicted</li>
+<li>If Prodigal fails to predict an AMR ORF, false negative result is returned</li>
+</ul>
+</blockquote>
+<p>Note: Prodigal is an unsupervised machine learning algorithm used to provide fast, accurate protein-coding gene predictions in GFF3, Genbank, or Sequin table format.</p>
+<br>
+
+<p><em>Option 2: Protein sequence as input</em></p>
+<blockquote>
+<ul>
+<li>RGI skips ORF prediction and directly uses the protein sequence</li>
+</ul>
+</blockquote>
+<br>
+
+<p>Currently, RGI supports four of CARD’s models. The models together with their functions are listed below:</p>
+<ul>
+<li><strong>protein homolog models</strong>: detects functional homologs of AMR genes</li>
+<li><strong>protein variant models</strong>: to accurately differentiate between susceptible intrinsic genes and intrinsic genes that have acquired mutations conferring AMR</li>
+<li><strong>rRNA mutation models</strong>: to detect drug resistant rRNA target sequences</li>
+<li><strong>protein over-expression models</strong>: to detect efflux subunits associated AMR, also highlights mutations conferring over-expression when present</li>
+</ul>
+<br>
+
+<p>The three terms that will be mentioned multiple times in this report i.e. Perfect, Strict and Loose are explained as follows by the RGI README:</p>
+<ul>
+<li><strong>Perfect</strong>: often applied to clinical surveillance as it detects perfect matches to the curated reference sequences and mutations in the CARD</li>
+<li><strong>Strict</strong>: detects previously unknown variants of known AMR genes, including secondary screen for key mutations, using detection models with CARD’s curated similarity cut-offs to ensure the detected variant is likely a functional AMR gene</li>
+<li><strong>Loose</strong>: works outside of the detection model cut-offs to provide detection of new, emergent threats and more distant homologs of AMR genes, but will also catalog homologous sequences and spurious partial hits that may not have a role in AMR. Combined with phenotypic screening, the Loose algorithm allows researchers to hone in on new AMR genes</li>
+</ul>
+<hr>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><p>The steps I took in running CARD/RGI are described below in chronological order:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to create a directory called "Project_3"</span></span><br><span class="line">mkdir Project_3</span><br><span class="line"></span><br><span class="line"><span class="comment"># to change current directory to "Project_3"</span></span><br><span class="line"><span class="built_in">cd</span> Project_3</span><br><span class="line"></span><br><span class="line"><span class="comment"># request for required resources</span></span><br><span class="line">srun -p bit150 -t 4:00:00 --mem=16000 -n 2 -c 4 --pty bash -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># to link the fasta files to current directory</span></span><br><span class="line"><span class="comment"># these fasta files will be used as the input files</span></span><br><span class="line">ln -s /group/bit150/Project_3/Ec_55989.contigs.fa .</span><br><span class="line">ln -s /group/bit150/Project_3/Ec_TY2482.contigs.fa .</span><br><span class="line"></span><br><span class="line"><span class="comment"># to load conda3 module</span></span><br><span class="line">module load conda3</span><br><span class="line"></span><br><span class="line"><span class="comment"># to activate the CARD environment</span></span><br><span class="line"><span class="built_in">source</span> activate CARD</span><br><span class="line"></span><br><span class="line"><span class="comment"># to run RGI main to generate Perfect or Strict hits</span></span><br><span class="line"><span class="comment"># for Ec_55989 (avirulent)</span></span><br><span class="line">rgi main --input_sequence Ec_55989.contigs.fa --output_file Ec_55989 --input_type contig --clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># for Ec_TY2482 (virulent)</span></span><br><span class="line">rgi main --input_sequence Ec_TY2482.contigs.fa --output_file Ec_TY2482 --input_type contig --clean</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># to run RGI main to generate Perfect or Strict hits, INCLUDING Loose hits</span></span><br><span class="line"><span class="comment"># for Ec_55989 (avirulent)</span></span><br><span class="line">rgi main --input_sequence Ec_55989.contigs.fa --output_file Ec_55989_loose --input_type contig --include_loose --clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># for Ec_TY2482 (virulent)</span></span><br><span class="line">rgi main --input_sequence Ec_TY2482.contigs.fa --output_file Ec_TY2482_loose --input_type contig --include_loose --clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># now it is time to make some heatmap visualizations</span></span><br><span class="line"><span class="comment"># .json files are required to create the heatmap visualizations</span></span><br><span class="line"><span class="comment"># to create a directory called "jsonfiles" and "jsonfiles_loose"</span></span><br><span class="line"><span class="comment"># "jsonfiles" directory is for json files WITHOUT Loose hits (DEFAULT)</span></span><br><span class="line"><span class="comment"># "jsonfiles_loose" directory is for .json files WITH Loose hits (LOOSE)</span></span><br><span class="line">mkdir jsonfiles</span><br><span class="line">mkdir jsonfiles_loose</span><br><span class="line"></span><br><span class="line"><span class="comment"># to move DEFAULT .json files to the "jasonfiles" directory</span></span><br><span class="line">mv Ec_55989.json ./jsonfiles</span><br><span class="line">mv Ec_TY2482.json ./jsonfiles</span><br><span class="line"></span><br><span class="line"><span class="comment"># move LOOSE .json files to "jsonfiles_loose" directory</span></span><br><span class="line">mv Ec_55989_loose.json ./jsonfiles_loose</span><br><span class="line">mv Ec_TY2482_loose.json ./jsonfiles_loose</span><br><span class="line"></span><br><span class="line"><span class="comment"># now the heatmap command line</span></span><br><span class="line"><span class="comment"># now that the .json files are in their respective directories, the heatmap command can be run</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> yellow for Perfect hit, teal for Strict hit, purple for No hit </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># to generate a heat map from pre-compiled RGI main DEFAULT .json files</span></span><br><span class="line"><span class="comment"># samples and AMR genes organized alphabetically</span></span><br><span class="line">rgi heatmap --input ./jsonfiles --output ./heatmap</span><br><span class="line"></span><br><span class="line"><span class="comment"># to generate a heat map from pre-compiled RGI main LOOSE .json files</span></span><br><span class="line"><span class="comment"># samples and AMR genes organized alphabetically</span></span><br><span class="line">rgi heatmap --input ./jsonfiles_loose --output ./heatmap_loose</span><br></pre></td></tr></table></figure>
+
+<p>In addition to using the terminal to run RGI commands to generate outputs, I also uploaded all the four .json files to the CARD website in order to obtain more interesting visualizations that would aid my assessment of genes responsible for virulence.</p>
+<p>I encountered an issue when trying to obtain visualizations for the LOOSE .json files that will be explained in the Results section. As a result, I resorted to using RStudio to count the number of Loose, Perfect and Strict hits obtained for the LOOSE outputs.</p>
+<p>R code:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to import the output .txt file for the avirulent strain</span></span><br><span class="line">Ec_55989_loose &lt;- read.delim(<span class="string">"~/Desktop/Ec_55989_loose.txt"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to view the number of Loose, Perfect and Strict hits</span></span><br><span class="line"><span class="comment"># for avirulent strain</span></span><br><span class="line">summary(Ec_55989_loose<span class="variable">$Cut_Off</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to import the output .txt file for the virulent strain</span></span><br><span class="line">Ec_TY2482_loose &lt;- read.delim(<span class="string">"~/Desktop/Ec_TY2482_loose.txt"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to view the number of Loose, Perfect and Strict hits</span></span><br><span class="line"><span class="comment"># for virulent strain</span></span><br><span class="line">summary(Ec_TY2482_loose<span class="variable">$Cut_Off</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><blockquote>
+<p><img src="https://i.imgur.com/O1rRhnU.png" alt=""><br><img src="https://i.imgur.com/uwuE2dc.png" alt=""><br>Diagram 1: Visualization of AMR genes in avirulent Ec_55989 (DEFAULT). A total of 56 hits were found. As expected, no Loose hits are displayed.</p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><img src="https://i.imgur.com/GJMmC6P.png" alt=""><br><img src="https://i.imgur.com/59A1BYn.png" alt=""><br>Diagram 2: Visualization of AMR genes in virulent Ec_TY2482 (DEFAULT). A total of 63 hits were found. As expected, no Loose hits are displayed.</p>
+</blockquote>
+<br>
+
+<p>I attempted to upload the LOOSE .json files to obtain the same visualizations for them. However, the error message below was displayed as each of the files exceeded 20 MB. </p>
+<p><img src="https://i.imgur.com/tc3DwDR.png" alt=""></p>
+<br>
+
+<blockquote>
+<p><img src="https://i.imgur.com/n4Bo2gP.png" alt=""><br>Diagram 3: The heatmap output obtained by using the heatmap command and DEFAULT .json files. Yellow represents Perfect hit, teal represents Strict hit and purple represents No hit. The genes that appear to be responsible for virulence are <strong>CTX-M-15</strong> and <strong>TEM-1</strong></p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><img src="https://i.imgur.com/y4I6YmH.png" alt=""><br>Diagram 4: The heatmap output obtained by using the heatmap command and LOOSE .json files. The output appears to be exactly the same as the one produced using the DEFAULT .json files</p>
+</blockquote>
+<br>
+
+<p>Using RStudio to count the number of Loose, Perfect and Strict hits led to the following results for the LOOSE outputs:</p>
+<blockquote>
+<p><img src="https://i.imgur.com/xWKtKpK.png" alt=""><br>Diagram 5: Hit counts for Ec_55989 according to whether they are Loose, Perfect or Strict</p>
+</blockquote>
+<blockquote>
+<p><img src="https://i.imgur.com/x7UHLlt.png" alt=""><br>Diagram 6: Hit counts for Ec_TY2482 according to whether they are Loose, Perfect or Strict. Note: It is observed that some of the Loose hits were “nudged” into Strict hits as the number of Strict hits increased to 53 compared to just 49 in the DEFAULT output</p>
+</blockquote>
+<hr>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><h3 id="Pattern-Observed"><a href="#Pattern-Observed" class="headerlink" title="Pattern Observed"></a>Pattern Observed</h3><p>One interesting pattern that can be observed about the results is that the virulent strain contains more AMR genes i.e 63 AMR genes compared to 59 AMR genes in the avirulent strain. In addition, it is observed that if Loose hits were to be included in the output, 4 of the Loose hits for the virulent strain will be nudged to Strict hits while none of the Loose hits for the avirulent strain is nudged to Strict hits. With regard to this difference, the RGI manual mentions that by default, all Loose hits of 95% identity or better are automatically listed as Strict, regardless of alignment length. If I prefer to not have the Loose hits nudged to Strict hits, I should then include “–exclude_nudge” in the RGI main command. Another interesting pattern to note is that a higher total number of Loose hits are obtained for the virulent strain compared to the avirulent strain.</p>
+<h3 id="Genes-Identified"><a href="#Genes-Identified" class="headerlink" title="Genes Identified"></a>Genes Identified</h3><blockquote>
+<p><img src="https://i.imgur.com/yRmSA0d.png" alt=""></p>
+<p><img src="https://i.imgur.com/JzuvxTs.png" alt=""></p>
+<p>Diagram 7: Screenshots of the sections of identified genes indicate Perfect Hit for the virulent strain (left) but No hit for the avirulent strain (right)</p>
+</blockquote>
+<p>According to the heatmap visualizations, it was determined that the genes most likely responsible for virulence are <strong>CTX-M-15</strong> and <strong>TEM-1</strong>. The reason for choosing those genes is because Perfect hits were found for those genes in the virulent strain while No hits were found for the same genes in the avirulent strain. Other genes that are less likely to cause virulence are <strong>vgAc, tetC, dfrA7, sul1, sul2, APH(6)-ld</strong> and <strong>APH(3”)-lb</strong>. Those genes are mentioned because Strict hits are found for those genes in the virulent strain while No hits are found for the same genes in the avirulent strain. There are a total of 7 genes that show such pattern.</p>
+<h3 id="Result-Comparison-with-Literature"><a href="#Result-Comparison-with-Literature" class="headerlink" title="Result Comparison with Literature"></a>Result Comparison with Literature</h3><p>According to “Open-Source Genomic Analysis of Shiga-Toxin–Producing E. coli O104:H4”, it mentions the how a large plasmid found in an <em>E. coli</em> strain contains the genes I identified above:</p>
+<p><em>The largest plasmid, pESBL TY2482, was an IncI plasmid similar to pEC_Bactec, which was found in an E. coli strain isolated from the joint of a horse with arthritis.18 The pESBL TY2482 plasmid encodes a CTX-M-15 ESBL, as well as a beta-lactamase from the TEM class.</em></p>
+<p>However, the paper simply mentions TEM as a class and not a specific gene. I then looked at another article to confirm whether it is indeed TEM-1 reponsible for virulence. The article “Epidemic Profile of Shiga-Toxin–Producing Escherichia coli O104:H4 Outbreak in Germany” mentions that:</p>
+<p><em>Other typical Shiga-toxin–producing E. coli genes such as stx1, eae, and ehx are missing. All isolates classified as the outbreak strain are resistant to beta-lactam antibiotics (e.g., ampicillin) and third-generation cephalosporins and are partially resistant to fluoroquinolones (nalidixic acid). The strain is sensitive to carbapenems and ciprofloxacin. The outbreak strain produces an ESBL complex (CTX-M15) and <strong>beta-lactamase TEM-1</strong>.</em></p>
+<p><strong>The excerpts above very well acknowledge the cause of virulence in the the TY2482 strain by the genes CTX-M-15 and TEM-1. It makes sense since those genes are linked to antibiotic resistance. This suggests that the virulent strain TY2482 is able to destroy beta-lactam ring of antibiotics, thus its resistance</strong>.</p>
+<h3 id="Output-Difference-or-not"><a href="#Output-Difference-or-not" class="headerlink" title="Output Difference (or not)"></a>Output Difference (or not)</h3><p>A change I made to the command line for RGI main is to add “–include loose”. As expected, the output files were bigger as Loose hits were included. However, I did not expect <em>that</em> many Loose hits to have been included. Nearly 5000 Loose hits were added when the option was used. However, when I attempted to create a heatmap visualization by taking into account the Loose hits, <strong>RGI automatically removed the Loose hits before producing the heatmap</strong>. This resulted in exactly the same heatmap output despite using the LOOSE .json files as input. While I am not aware of making Loose hits be included in the heatmap, it would make sense for RGI to do so as the heatmap output would be too big to assess properly if Loose hits were actually included. </p>
+<h3 id="Exploring-Other-Options"><a href="#Exploring-Other-Options" class="headerlink" title="Exploring Other Options"></a>Exploring Other Options</h3><p>I am yet to explore what I can possible do with the .eps files I obtained as outputs to the RGI main commands. A Google search revealed that .eps is a file extension for a graphics file format used in vector-based images in Adobe Illustrator. Apparently it also usually contains a bit map version of the image for simpler viewing rather than the vector instructions to draw the image.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Arwin Lashawn</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/bioinformatics/"># bioinformatics</a>
+                    
+                        <a href="/tags/r/"># r</a>
+                    
+                        <a href="/tags/bash/"># bash</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/04/07/genesis/">blog setup tutorial ft. GitHub and Hexo</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Arwin Lashawn | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
