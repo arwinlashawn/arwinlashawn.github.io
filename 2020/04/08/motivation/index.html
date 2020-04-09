@@ -12,7 +12,7 @@
 
 
 
-<title>motivation | Arwin&#39;s Blog | Projects</title>
+<title>how to use define &#34;tab&#34; delimiter with &#34;cut&#34; command in bash | Arwin&#39;s Blog | Projects</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">motivation</h1>
+            <h1 class="post-title">how to use define &#34;tab&#34; delimiter with &#34;cut&#34; command in bash</h1>
             
                 <div class="post-meta">
                     
@@ -124,12 +186,39 @@
                         </span>
                     
                     
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/tutorial/">tutorial</a>
+                            
+                        </span>
+                    
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>I used to hate coding.</p>
+            <h3 id="How-this-may-be-useful"><a href="#How-this-may-be-useful" class="headerlink" title="How this may be useful"></a>How this may be useful</h3><p>Say you are working with a .tsv file and you only want the third field (or third column) only. You know how the “cut” command works but can’t seem to define “tab” for the “-d” flag in the terminal.  </p>
+<blockquote>
+<p><em>Important</em>: One time I was working with some .tsv files but defining “tab” as the delimiter <strong>wouldn&#39;t</strong> work. This was because although the files have a .tsv extension, the separator used is actually “|”. For some context, I was working with BLAST results. <em>A reminder to “less” the file first to get a sense of the delimiter used!</em></p>
+</blockquote>
+<h3 id="Two-ways-to-do-it"><a href="#Two-ways-to-do-it" class="headerlink" title="Two ways to do it"></a>Two ways to do it</h3><p><em>Examples below are for grabbing the third field of a .tsv file</em>:</p>
+<ol>
+<li><p>In the terminal, Ctrl + V followed by Tab. Worked for me on <strong>Linux</strong> and <strong>Git Bash</strong>. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d <span class="string">'	'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use <code>$&#39;\t&#39;</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d$<span class="string">'\t'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
+<p>You may be wondering. Are the dollar sign and single quotes actually necessary? <strong>Yes</strong>.  </p>
+<blockquote>
+<p>Explanation: If you go ahead and just specify ‘\t’, you will get an error saying “the delimiter must be a single character”. By adding a dollar sign to it, you get a general form of <code>$&#39;string&#39;</code> which is treated uniquely. The result? The word expands to a <code>string</code>, and the backslash-escaped character, in this case “t”, is replaced by a “horizontal tab” according to the <strong>ANSI-C standard</strong>.</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
+<li><a href="https://unix.stackexchange.com/questions/35369/how-to-define-tab-delimiter-with-cut-in-bash" target="_blank" rel="noopener">“How to definte ‘tab’ delimiter with ‘cut’ in BASH?” on Stack Exchange</a>  </li>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html" target="_blank" rel="noopener">ANSI-C Quoting</a></li>
+</ul>
 
         </div>
 
@@ -157,6 +246,14 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/bash/"># bash</a>
+                    
+                        <a href="/tags/terminal/"># terminal</a>
+                    
+                        <a href="/tags/cut/"># cut</a>
+                    
+                        
                 </span>
             </div>
             <div>
