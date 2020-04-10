@@ -201,10 +201,10 @@
 
         <div class="post-content">
             <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><blockquote>
-<p>The “cut” command specifies tab space as the delimiter by default, hence making it very powerful for .tsv files. Just using it as an example!</p>
+<p>The &quot;cut&quot; command specifies tab space as the delimiter by default, hence making it very powerful for .tsv files. Just using it as an example!</p>
 </blockquote>
 <blockquote>
-<p><em>Important</em>: One time I was working with a .tsv files but defining “tab” as the delimiter didn’t work as expected. This was because although the file has a .tsv extension, the separators in the file also included &quot;|&quot;, and it appeared <strong>before</strong> tab spaces. For some context, I was working with BLAST results. <em>A reminder to &quot;less&quot; the file first to get a sense of the delimiter used!</em></p>
+<p><em>Important</em>: One time I was working with a .tsv files but defining &quot;tab&quot; as the delimiter didn&#39;t work as expected. This was because although the file has a .tsv extension, the separators in the file also included &quot;|&quot;, and it appeared <strong>before</strong> tab spaces. For some context, I was working with BLAST results. <em>A reminder to &quot;less&quot; the file first to get a sense of the delimiter used!</em></p>
 </blockquote>
 <h2 id="Two-ways-to-define-quot-tab”"><a href="#Two-ways-to-define-quot-tab”" class="headerlink" title="Two ways to define &quot;tab”"></a>Two ways to define &quot;tab”</h2><p><em>Examples below are for grabbing the third field of a .tsv file</em>:</p>
 <ol>
@@ -215,7 +215,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d$<span class="string">'\t'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
 <p>You may be wondering, are the dollar sign and single quotes actually necessary? <strong>Yes</strong>.  </p>
 <blockquote>
-<p>Explanation: If you go ahead and just specify ‘\t’, you will get an error saying “the delimiter must be a single character”. By adding a dollar sign to it, you get a general form of <code>$&#39;string&#39;</code> which is treated uniquely. The result? The word expands to a <code>string</code>, and the backslash-escaped character, in this case “t”, is replaced by a “horizontal tab” according to the <strong>ANSI-C standard</strong>.</p>
+<p>Explanation: If you go ahead and just specify &#39;\t&#39;, you will get an error saying &quot;the delimiter must be a single character&quot;. By adding a dollar sign to it, you get a general form of <code>$&#39;string&#39;</code> which is treated uniquely. The result? The word expands to a <code>string</code>, and the backslash-escaped character, in this case &quot;\t&quot;, is replaced by a &quot;horizontal tab&quot; according to the <strong>ANSI-C standard</strong>.</p>
 </blockquote>
 </li>
 </ol>
