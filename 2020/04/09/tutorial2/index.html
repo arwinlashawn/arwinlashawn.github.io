@@ -11,8 +11,10 @@
 
 
 
+    <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
-<title>how to use define &#34;tab&#34; delimiter with &#34;cut&#34; command in bash | Arwin&#39;s Blog | Projects</title>
+
+<title>difference between executing and sourcing a bash script | Arwin Lashawn | Codes</title>
 
 
 
@@ -49,7 +51,7 @@
         <header>
     <nav class="navbar">
         <div class="container">
-            <div class="navbar-header header-logo"><a href="/">Arwin&#39;s Blog | Projects</a></div>
+            <div class="navbar-header header-logo"><a href="/">Arwin Lashawn | Codes</a></div>
             <div class="menu navbar-right">
                 
                     <a class="menu-item" href="/archives">Posts</a>
@@ -71,7 +73,7 @@
         <div class="container">
             <div class="navbar-header">
                 <div>
-                    <a href="/">Arwin&#39;s Blog | Projects</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                    <a href="/">Arwin Lashawn | Codes</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
                 </div>
                 <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
             </div>
@@ -173,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">how to use define &#34;tab&#34; delimiter with &#34;cut&#34; command in bash</h1>
+            <h1 class="post-title">difference between executing and sourcing a bash script</h1>
             
                 <div class="post-meta">
                     
@@ -182,14 +184,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 7, 2020&nbsp;&nbsp;2:37:23</a>
+                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;22:00:57</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/tutorial/">tutorial</a>
+                                <a href="/categories/tutorials/">tutorials</a>
                             
                         </span>
                     
@@ -198,27 +200,27 @@
         </header>
 
         <div class="post-content">
-            <h3 id="How-this-may-be-useful"><a href="#How-this-may-be-useful" class="headerlink" title="How this may be useful"></a>How this may be useful</h3><p>Say you are working with a .tsv file and you only want the third field (or third column) only. You know how the “cut” command works but can’t seem to define “tab” for the “-d” flag in the terminal.  </p>
-<blockquote>
-<p><em>Important</em>: One time I was working with some .tsv files but defining “tab” as the delimiter <strong>wouldn&#39;t</strong> work. This was because although the files have a .tsv extension, the separator used is actually “|”. For some context, I was working with BLAST results. <em>A reminder to “less” the file first to get a sense of the delimiter used!</em></p>
-</blockquote>
-<h3 id="Two-ways-to-do-it"><a href="#Two-ways-to-do-it" class="headerlink" title="Two ways to do it"></a>Two ways to do it</h3><p><em>Examples below are for grabbing the third field of a .tsv file</em>:</p>
-<ol>
-<li><p>In the terminal, Ctrl + V followed by Tab. Worked for me on <strong>Linux</strong> and <strong>Git Bash</strong>. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d <span class="string">'	'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
+            <p><em>While we may all be familiar with executing scripts, how does it compare to sourcing scripts? I have sourced scripts before but didn&#39;t really bother really digging into the differences. Let&#39;s get into it.</em></p>
+<h2 id="Visual-representation-of-the-difference"><a href="#Visual-representation-of-the-difference" class="headerlink" title="Visual representation of the difference"></a>Visual representation of the difference</h2><ul>
+<li>executing<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this executes the script in the current directory</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ ./script</span><br><span class="line"></span><br><span class="line"><span class="comment"># this executes the script if located in some directory in $PATH</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ script</span><br></pre></td></tr></table></figure>
+<br></li>
+<li>sourcing <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this sources the script</span></span><br><span class="line"><span class="comment"># does NOT have to be executable</span></span><br><span class="line">$ <span class="built_in">source</span> script</span><br><span class="line"></span><br><span class="line"><span class="comment"># also sources the script and need NOT be executable</span></span><br><span class="line"><span class="comment"># does exactly the same thing as `source script` because bash defines `source` as an alias to the dot</span></span><br><span class="line">$ . script</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>Use <code>$&#39;\t&#39;</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d$<span class="string">'\t'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
-<p>You may be wondering. Are the dollar sign and single quotes actually necessary? <strong>Yes</strong>.  </p>
-<blockquote>
-<p>Explanation: If you go ahead and just specify ‘\t’, you will get an error saying “the delimiter must be a single character”. By adding a dollar sign to it, you get a general form of <code>$&#39;string&#39;</code> which is treated uniquely. The result? The word expands to a <code>string</code>, and the backslash-escaped character, in this case “t”, is replaced by a “horizontal tab” according to the <strong>ANSI-C standard</strong>.</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
-<li><a href="https://unix.stackexchange.com/questions/35369/how-to-define-tab-delimiter-with-cut-in-bash" target="_blank" rel="noopener">&quot;How to define &#39;tab&#39; delimiter with &#39;cut&#39; in BASH?&quot; on Stack Exchange</a>  </li>
-<li><a href="https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html" target="_blank" rel="noopener">ANSI-C Quoting</a></li>
 </ul>
+<h2 id="Verbal-representation-of-the-difference"><a href="#Verbal-representation-of-the-difference" class="headerlink" title="Verbal representation of the difference"></a>Verbal representation of the difference</h2><ul>
+<li><em>Executing</em><ul>
+<li>Runs all the commands in a new/separate shell. </li>
+<li>Any changes to the environment as a result of the commands only apply to the new shell. This means the environment in the current shell remains untouched.</li>
+</ul>
+</li>
+<li><em>Sourcing</em><ul>
+<li>Runs all the commands in the current shell. </li>
+<li>Any changes to the environment resulting from the commands will apply in the current shell.</li>
+</ul>
+</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it" target="_blank" rel="noopener">What is the difference between executing a Bash script vs sourcing it?</a></p>
 
         </div>
 
@@ -249,9 +251,13 @@
                     
                         <a href="/tags/bash/"># bash</a>
                     
-                        <a href="/tags/terminal/"># terminal</a>
+                        <a href="/tags/linux/"># linux</a>
                     
-                        <a href="/tags/cut/"># cut</a>
+                        <a href="/tags/bashscript/"># bashscript</a>
+                    
+                        <a href="/tags/executing/"># executing</a>
+                    
+                        <a href="/tags/sourcing/"># sourcing</a>
                     
                         
                 </span>
@@ -264,8 +270,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/04/07/tutorial0/">blog setup tutorial ft. GitHub and Hexo</a>
+                <a class="prev" rel="prev" href="/2020/04/09/genesis/">blog setup tutorial ft. GitHub and Hexo</a>
             
+            
+            <a class="next" rel="next" href="/2020/04/09/tutorial1/">how to define/specify "tab" on command line</a>
             
         </section>
 
