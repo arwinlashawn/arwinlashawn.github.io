@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>difference between executing and sourcing a bash script | Arwin Lashawn | Codes</title>
+<title>how to loop through many strings in bash | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">difference between executing and sourcing a bash script</h1>
+            <h1 class="post-title">how to loop through many strings in bash</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;22:00:57</a>
+                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;23:18:22</a>
                         </span>
                     
                     
@@ -200,27 +200,13 @@
         </header>
 
         <div class="post-content">
-            <p><em>While we may all be familiar with executing scripts, how does it compare to sourcing scripts? I have sourced scripts before but didn&#39;t really bother really digging into the differences. Let&#39;s get into it.</em></p>
-<h2 id="Visual-representation-of-the-difference"><a href="#Visual-representation-of-the-difference" class="headerlink" title="Visual representation of the difference"></a>Visual representation of the difference</h2><ul>
-<li>executing<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this executes the script in the current directory</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ ./script</span><br><span class="line"></span><br><span class="line"><span class="comment"># this executes the script if located in some directory in $PATH</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ script</span><br></pre></td></tr></table></figure>
-<br></li>
-<li>sourcing <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this sources the script</span></span><br><span class="line"><span class="comment"># does NOT have to be executable</span></span><br><span class="line">$ <span class="built_in">source</span> script</span><br><span class="line"></span><br><span class="line"><span class="comment"># also sources the script and need NOT be executable</span></span><br><span class="line"><span class="comment"># does exactly the same thing as `source script` because bash defines `source` as an alias to the dot</span></span><br><span class="line">$ . script</span><br></pre></td></tr></table></figure>
+            <h2 id="The-simple-way-to-do-it"><a href="#The-simple-way-to-do-it" class="headerlink" title="The simple way to do it"></a>The simple way to do it</h2><p>Say we want to loop through three strings called &quot;string1&quot;, &quot;string2&quot; and &quot;string3&quot; and output them on the command line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> string1 string2 string3</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<h2 id="Verbal-representation-of-the-difference"><a href="#Verbal-representation-of-the-difference" class="headerlink" title="Verbal representation of the difference"></a>Verbal representation of the difference</h2><ul>
-<li><em>Executing</em><ul>
-<li>Runs all the commands in a new/separate shell. </li>
-<li>Any changes to the environment as a result of the commands only apply to the new shell. This means the environment in the current shell remains untouched.</li>
-</ul>
-</li>
-<li><em>Sourcing</em><ul>
-<li>Runs all the commands in the current shell. </li>
-<li>Any changes to the environment resulting from the commands will apply in the current shell.</li>
-</ul>
-</li>
-</ul>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it" target="_blank" rel="noopener">What is the difference between executing a Bash script vs sourcing it?</a></p>
+<h2 id="What-if-I-have-many-more-strings-to-loop-through"><a href="#What-if-I-have-many-more-strings-to-loop-through" class="headerlink" title="What if I have many more strings to loop through?"></a>What if I have many more strings to loop through?</h2><p>We are gonna make use of the <code>declare</code> command to make our script cleaner. <em>Unless you don’t mind typing all the strings out on one line as seen above.</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first let's declare an array variable</span></span><br><span class="line"><span class="comment"># -a flag results in an indexed array</span></span><br><span class="line"><span class="built_in">declare</span> -a arr=(<span class="string">"string1"</span> <span class="string">"string2"</span> <span class="string">"string3"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># now let's loop through the created array (arr)</span></span><br><span class="line"><span class="comment"># notice we use "@" to access ALL the strings in arr</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;arr[@]&#125;</span>"</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment"># you can specify the index of the string you want to access</span></span><br><span class="line"><span class="comment"># remember, the array starts with index 0!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># multi-line array declaration is supported e.g.</span></span><br><span class="line"><span class="comment"># makes your code a tad bit cleaner</span></span><br><span class="line"><span class="built_in">declare</span> -a arr=(<span class="string">"string1"</span></span><br><span class="line">				<span class="string">"string2"</span></span><br><span class="line">				<span class="string">"string3"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://stackoverflow.com/questions/8880603/loop-through-an-array-of-strings-in-bash" target="_blank" rel="noopener">Loop through an array of strings in Bash?</a></p>
 
         </div>
 
@@ -253,11 +239,11 @@
                     
                         <a href="/tags/linux/"># linux</a>
                     
-                        <a href="/tags/bashscript/"># bashscript</a>
+                        <a href="/tags/loop/"># loop</a>
                     
-                        <a href="/tags/executing/"># executing</a>
+                        <a href="/tags/strings/"># strings</a>
                     
-                        <a href="/tags/sourcing/"># sourcing</a>
+                        <a href="/tags/declare/"># declare</a>
                     
                         
                 </span>
@@ -270,10 +256,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/04/09/t3/">how to loop through many strings in bash</a>
             
-            
-            <a class="next" rel="next" href="/2020/04/09/tutorial1/">how to define/specify "tab" on command line</a>
+            <a class="next" rel="next" href="/2020/04/09/tutorial2/">difference between executing and sourcing a bash script</a>
             
         </section>
 
