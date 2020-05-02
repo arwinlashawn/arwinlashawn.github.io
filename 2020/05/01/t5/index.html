@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Arwin Lashawn">
+
+
+
+
+    <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
+
+
+<title>How to extract all rows of a table in a SQLite database using Python | Arwin Lashawn | Codes</title>
+
+
+
+    <link rel="icon" href="/avatar1.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Arwin Lashawn | Codes</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Arwin Lashawn | Codes</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">How to extract all rows of a table in a SQLite database using Python</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Arwin Lashawn</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 1, 2020&nbsp;&nbsp;19:53:33</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/tutorials/">tutorials</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>Found myself trying to compare the differences between two SQLite databases but since I was too lazy to figure out how to use SQLite Studio in order to do that (not sure if that is even possible by the way), I decided to extract all the rows from both databases using Python and then use Bash to find their differences</em>.</p>
+<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><ul>
+<li>Usage of the <code>sqlite3</code> module to connect to the SQLite database, run a select SQL query to get all the rows, and then <strong>fetch</strong> all of them.</li>
+<li>Usage of the <code>argparse</code> module to enable the user to specify the database, table and output file from the command line.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># set up argparse arguments</span></span><br><span class="line"><span class="comment"># need arguments for:</span></span><br><span class="line"><span class="comment"># 1. path to database</span></span><br><span class="line"><span class="comment"># 2. path to output file</span></span><br><span class="line"><span class="comment"># 3. table from which rows will be selected</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">"To read all the rows of a SQLite table into a specified output file"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-d'</span>, <span class="string">'--database'</span>, type=str, metavar=<span class="string">''</span>, help=<span class="string">'Path to SQLite table'</span>, required=<span class="literal">True</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-o'</span>, <span class="string">'--output'</span>, type=str, metavar=<span class="string">''</span>, help=<span class="string">'Path to output file'</span>, required=<span class="literal">True</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-t'</span>, <span class="string">'--table'</span>, type=str, metavar=<span class="string">''</span>, help=<span class="string">'Table from which rows will be selected'</span>, required=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># grabs all the args</span></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line"><span class="comment"># "w" option creates the file if doesn't exist</span></span><br><span class="line"><span class="comment"># will overwrite file if already exists</span></span><br><span class="line"><span class="comment"># meaning of "w" from official doc: open for writing, truncating the file first</span></span><br><span class="line">output_file = open(args.output, <span class="string">"w"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readSqliteTable</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		conn = sqlite3.connect(args.database)</span><br><span class="line">		c = conn.cursor()</span><br><span class="line">		print(<span class="string">"Connected to SQLite table"</span>)</span><br><span class="line"></span><br><span class="line">		select_query = <span class="string">f"""SELECT * FROM <span class="subst">&#123;args.table&#125;</span>"""</span></span><br><span class="line">		c.execute(select_query)</span><br><span class="line">		records = c.fetchall()</span><br><span class="line">		print(<span class="string">f"Total rows in '<span class="subst">&#123;args.table&#125;</span>':"</span>, len(records))</span><br><span class="line">		print(<span class="string">f"""Now printing each row from the '<span class="subst">&#123;args.table&#125;</span>' in '<span class="subst">&#123;args.database&#125;</span>'..."""</span>)</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> records:</span><br><span class="line">			print(i, file = output_file)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># closing cursor is not necessary from reading (maybe look into this again)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">except</span> sqlite3.Error <span class="keyword">as</span> message:</span><br><span class="line">		print(<span class="string">"Failed to read data from SQLite database,"</span>, message)</span><br><span class="line">	<span class="keyword">finally</span>:</span><br><span class="line">		<span class="keyword">if</span> (conn):</span><br><span class="line">			conn.close()</span><br><span class="line">			print(<span class="string">"SQLite connection is closed"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	readSqliteTable()</span><br></pre></td></tr></table></figure>
+
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://pynative.com/python-sqlite-select-from-table/" target="_blank" rel="noopener">Python Select from SQLite Table</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Arwin Lashawn</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/sqlite/"># sqlite</a>
+                    
+                        <a href="/tags/python/"># python</a>
+                    
+                        <a href="/tags/rows/"># rows</a>
+                    
+                        <a href="/tags/table/"># table</a>
+                    
+                        <a href="/tags/database/"># database</a>
+                    
+                        <a href="/tags/sql/"># sql</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/05/01/t4/">How to specify bold or italic in Markdown inline code</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Arwin Lashawn | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
