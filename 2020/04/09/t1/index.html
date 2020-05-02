@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>How to Define &#34;Tab&#34; on Command Line | Arwin Lashawn | Codes</title>
+<title>Difference Between Executing and Sourcing a Bash Script | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to Define &#34;Tab&#34; on Command Line</h1>
+            <h1 class="post-title">Difference Between Executing and Sourcing a Bash Script</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;16:16:38</a>
+                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;22:00:57</a>
                         </span>
                     
                     
@@ -200,29 +200,27 @@
         </header>
 
         <div class="post-content">
-            <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><blockquote>
-<p>The &quot;cut&quot; command specifies tab space as the delimiter by default, hence making it easier to use for .tsv files. Just using it as an example!</p>
-</blockquote>
-<blockquote>
-<p><em>Important</em>: One time I was working with a .tsv files but defining &quot;tab&quot; as the delimiter didn&#39;t work as expected. This was because although the file has a .tsv extension, the separators in the file also included &quot;|&quot;, and it appeared <strong>before</strong> tab spaces. For some context, I was working with BLAST results. <em>A reminder to &quot;less&quot; the file first to get a sense of the delimiter used!</em></p>
-</blockquote>
-<h2 id="Two-ways-to-define-quot-tab”"><a href="#Two-ways-to-define-quot-tab”" class="headerlink" title="Two ways to define &quot;tab”"></a>Two ways to define &quot;tab”</h2><p><em>Examples below are for grabbing the third field of a .tsv file</em>:</p>
-<ol>
-<li><p>On the command line, Ctrl + V followed by Tab. Worked for me on both <strong>Linux</strong> and <strong>Git Bash</strong> command lines. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d <span class="string">'	'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
+            <p><em>While we may all be familiar with executing scripts, how does it compare to sourcing scripts? I have sourced scripts before but didn&#39;t really bother really digging into the differences. Let&#39;s get into it.</em></p>
+<h2 id="Visual-representation-of-the-difference"><a href="#Visual-representation-of-the-difference" class="headerlink" title="Visual representation of the difference"></a>Visual representation of the difference</h2><ul>
+<li>executing<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this executes the script in the current directory</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ ./script</span><br><span class="line"></span><br><span class="line"><span class="comment"># this executes the script if located in some directory in $PATH</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ script</span><br></pre></td></tr></table></figure>
+<br></li>
+<li>sourcing <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this sources the script</span></span><br><span class="line"><span class="comment"># does NOT have to be executable</span></span><br><span class="line">$ <span class="built_in">source</span> script</span><br><span class="line"></span><br><span class="line"><span class="comment"># also sources the script and need NOT be executable</span></span><br><span class="line"><span class="comment"># does exactly the same thing as `source script` because bash defines `source` as an alias to the dot</span></span><br><span class="line">$ . script</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>Use <code>$&#39;\t&#39;</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -f 3 -d$<span class="string">'\t'</span> &lt;.tsv file&gt;</span><br></pre></td></tr></table></figure>
-<p>You may be wondering, are the dollar sign and single quotes actually necessary? <strong>Yes</strong>.  </p>
-<blockquote>
-<p>Explanation: If you go ahead and just specify &#39;\t&#39;, you will get an error saying &quot;the delimiter must be a single character&quot;. By adding a dollar sign to it, you get a general form of <code>$&#39;string&#39;</code> which is treated uniquely. The result? The word expands to a <code>string</code>, and the backslash-escaped character, in this case &quot;\t&quot;, is replaced by a &quot;horizontal tab&quot; according to the <strong>ANSI-C standard</strong>.</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
-<li><a href="https://stackoverflow.com/questions/6392249/how-to-enter-a-tab-char-on-command-line" target="_blank" rel="noopener">&quot;How to enter a tab char on command line?&quot; on Stack Overflow</a>  </li>
-<li><a href="https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html" target="_blank" rel="noopener">ANSI-C Quoting</a></li>
 </ul>
+<h2 id="Verbal-representation-of-the-difference"><a href="#Verbal-representation-of-the-difference" class="headerlink" title="Verbal representation of the difference"></a>Verbal representation of the difference</h2><ul>
+<li><em>Executing</em><ul>
+<li>Runs all the commands in a new/separate shell. </li>
+<li>Any changes to the environment as a result of the commands only apply to the new shell. This means the environment in the current shell remains untouched.</li>
+</ul>
+</li>
+<li><em>Sourcing</em><ul>
+<li>Runs all the commands in the current shell. </li>
+<li>Any changes to the environment resulting from the commands will apply in the current shell.</li>
+</ul>
+</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it" target="_blank" rel="noopener">What is the difference between executing a Bash script vs sourcing it?</a></p>
 
         </div>
 
@@ -253,9 +251,11 @@
                     
                         <a href="/tags/bash/"># bash</a>
                     
-                        <a href="/tags/tab/"># tab</a>
-                    
                         <a href="/tags/linux/"># linux</a>
+                    
+                        <a href="/tags/executing/"># executing</a>
+                    
+                        <a href="/tags/sourcing/"># sourcing</a>
                     
                         
                 </span>
@@ -268,7 +268,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/04/09/t2/">Difference Between Executing and Sourcing a Bash Script</a>
+                <a class="prev" rel="prev" href="/2020/04/09/t2/">How to Loop Through Strings in Bash</a>
             
             
             <a class="next" rel="next" href="/2020/04/08/p1/">Identifying the Source of Virulence</a>
