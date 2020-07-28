@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>How to use Bash to get the values in a specific field of a csv file (WITHOUT grep/cut) | Arwin Lashawn | Codes</title>
+<title>How to specify bold or italic in Markdown inline code | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to use Bash to get the values in a specific field of a csv file (WITHOUT grep/cut)</h1>
+            <h1 class="post-title">How to specify bold or italic in Markdown inline code</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 9, 2020&nbsp;&nbsp;23:18:22</a>
+                        Date: <a href="#">May 2, 2020&nbsp;&nbsp;9:25:29</a>
                         </span>
                     
                     
@@ -200,19 +200,20 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p><em>Was working on a Stack Overflow question and found myself working on a Bash script which converts csv into a Bash array. What if we wanted to access the second field of the csv and only that? Using <code>grep</code>/<code>cut</code> is the obvious solution but the method below would demonstrate another way to achieve it. This helped me understand Bash better.</em></p>
+            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>Found myself looking this up for a few minutes in order to make the second “file” in <code>file=file</code> italic. Simply wrapping the word with single asterisk does not work. Nor does escaping the asterisks (Yes, I tried stupid stuff). A nearly method of solving it is:  </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">`file=`</span><span class="emphasis">*`file`*</span></span><br></pre></td></tr></table></figure>
+<p>but it resulted in the inline code being separated:<br><code>file=</code><em><code>file</code></em></p>
 <h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><ul>
-<li>Make use of the <code>read</code> command. The command reads a file line by line. Say we want to loop through every row until the 5th row in a csv file called <code>input.csv</code>. <strong>While</strong> we do that, we only grab the first field of the csv file and write the results into a text file.</li>
-<li>The key: use the <code>-a</code> flag for the <code>read</code> command. This will <strong>create an indexed array</strong>.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># this script grabs only the first field of the first 5 rows of a csv file</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"># initialize var to 0</span></span><br><span class="line">	var=0</span><br><span class="line">	<span class="comment"># set while condition so loop terminates after reading 5 lines</span></span><br><span class="line">	<span class="keyword">while</span> (( var &lt; 5 ))  </span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">		<span class="comment"># set separator to "," and specify "-a" flag</span></span><br><span class="line">		IFS=, <span class="built_in">read</span> -a arr</span><br><span class="line">		<span class="comment"># increment var by 1 after every iteration</span></span><br><span class="line">		var=$(( var+1 )) </span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;arr[0]&#125;</span>"</span> &gt;&gt; output.txt</span><br><span class="line">		<span class="comment">#echo $var</span></span><br><span class="line">	<span class="keyword">done</span></span><br><span class="line">&#125; &lt; input.csv</span><br></pre></td></tr></table></figure>
+<li>Usage of HTML: <code>&lt;code&gt; &lt;/code&gt;</code><br>To get <code>file=<em>file</em></code>,<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">code</span>&gt;</span></span>file=<span class="emphasis">*file*</span><span class="xml"><span class="tag">&lt;/<span class="name">code</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="Extra-snippet"><a href="#Extra-snippet" class="headerlink" title="Extra snippet"></a>Extra snippet</h2><ul>
-<li>You can manually declare an indexed array too! Use the <code>declare</code> command.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first let's declare an array variable</span></span><br><span class="line"><span class="comment"># -a flag results in an indexed array</span></span><br><span class="line"><span class="built_in">declare</span> -a arr=(<span class="string">"string1"</span> <span class="string">"string2"</span> <span class="string">"string3"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># now let's loop through the created array (arr)</span></span><br><span class="line"><span class="comment"># notice we use "@" to access ALL the strings in arr</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;arr[@]&#125;</span>"</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment"># you can specify the index of the string you want to access</span></span><br><span class="line"><span class="comment"># remember, the array starts with index 0!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># multi-line array declaration is supported e.g.</span></span><br><span class="line"><span class="comment"># makes your code a tad bit cleaner with many strings</span></span><br><span class="line"><span class="built_in">declare</span> -a arr=(<span class="string">"string1"</span></span><br><span class="line">		<span class="string">"string2"</span></span><br><span class="line">		<span class="string">"string3"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Alternative-method-full-HTML"><a href="#Alternative-method-full-HTML" class="headerlink" title="Alternative method (full HTML)"></a>Alternative method (full HTML)</h3><p>To obtain the same result:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">code</span>&gt;</span></span> file=<span class="xml"><span class="tag">&lt;<span class="name">i</span>&gt;</span></span>file<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span> <span class="xml"><span class="tag">&lt;/<span class="name">code</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://stackoverflow.com/questions/8880603/loop-through-an-array-of-strings-in-bash" target="_blank" rel="noopener">Loop through an array of strings in Bash?</a></p>
+
+
+
 
         </div>
 
@@ -241,21 +242,15 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/bash/"># bash</a>
+                        <a href="/tags/markdown/"># markdown</a>
                     
-                        <a href="/tags/cut/"># cut</a>
+                        <a href="/tags/bold/"># bold</a>
                     
-                        <a href="/tags/linux/"># linux</a>
+                        <a href="/tags/html/"># html</a>
                     
-                        <a href="/tags/loop/"># loop</a>
+                        <a href="/tags/italic/"># italic</a>
                     
-                        <a href="/tags/strings/"># strings</a>
-                    
-                        <a href="/tags/declare/"># declare</a>
-                    
-                        <a href="/tags/array/"># array</a>
-                    
-                        <a href="/tags/grep/"># grep</a>
+                        <a href="/tags/inlinecode/"># inlinecode</a>
                     
                         
                 </span>
@@ -268,10 +263,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/05/01/t3/">How to find differences between two (txt/csv) files</a>
+                <a class="prev" rel="prev" href="/2020/05/02/t5/">How to extract all rows of a table in a SQLite database using Python</a>
             
             
-            <a class="next" rel="next" href="/2020/04/09/t1/">Difference Between Executing and Sourcing a Bash Script</a>
+            <a class="next" rel="next" href="/2020/05/02/t3/">How to find differences between two (txt/csv) files</a>
             
         </section>
 

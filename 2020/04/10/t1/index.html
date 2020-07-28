@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>How to find differences between two (txt/csv) files | Arwin Lashawn | Codes</title>
+<title>Difference Between Executing and Sourcing a Bash Script | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to find differences between two (txt/csv) files</h1>
+            <h1 class="post-title">Difference Between Executing and Sourcing a Bash Script</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">May 1, 2020&nbsp;&nbsp;17:38:56</a>
+                        Date: <a href="#">April 10, 2020&nbsp;&nbsp;13:00:57</a>
                         </span>
                     
                     
@@ -200,20 +200,27 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p><em>Found myself comparing the differences between files a few times within a month, especially <code>.txt</code> and <code>.csv</code> files with many rows. I would usually need to find out what rows are missing from one file for reasons such as <strong>expecting them to be the same</strong>.</em></p>
-<h2 id="How-to-do-it"><a href="#How-to-do-it" class="headerlink" title="How to do it?"></a>How to do it?</h2><ul>
-<li>Use <code>grep</code>! Yes, I thought <code>grep</code> is only useful to grab certain lines from a file or to find missing lines in <strong>one</strong> file. </li>
+            <p><em>While we may all be familiar with executing scripts, how does it compare to sourcing scripts? I have sourced scripts before but didn&#39;t really bother really digging into the differences. Let&#39;s get into it.</em></p>
+<h2 id="Visual-representation-of-the-difference"><a href="#Visual-representation-of-the-difference" class="headerlink" title="Visual representation of the difference"></a>Visual representation of the difference</h2><ul>
+<li>executing<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this executes the script in the current directory</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ ./script</span><br><span class="line"></span><br><span class="line"><span class="comment"># this executes the script if located in some directory in $PATH</span></span><br><span class="line"><span class="comment"># must be executable</span></span><br><span class="line">$ script</span><br></pre></td></tr></table></figure>
+<br></li>
+<li>sourcing <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this sources the script</span></span><br><span class="line"><span class="comment"># does NOT have to be executable</span></span><br><span class="line">$ <span class="built_in">source</span> script</span><br><span class="line"></span><br><span class="line"><span class="comment"># also sources the script and need NOT be executable</span></span><br><span class="line"><span class="comment"># does exactly the same thing as `source script` because bash defines `source` as an alias to the dot</span></span><br><span class="line">$ . script</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to find what is in file2 but missing in file1</span></span><br><span class="line">grep -Fxvf file1 file2</span><br></pre></td></tr></table></figure>
-<p>Note that the order of the files matters. If positions of file2 and file1 are swapped, what it will do is find what is in file1 but missing in file2.  </p>
-<p><em>What do the flags mean? According to the official documentation for GNU <code>grep</code>:</em>  </p>
-<ul>
-<li><code>-F</code>: <code>--fixed-strings</code>, interpret patterns as <strong>fixed strings</strong>, not regular expressions (Apparently specifying this saves a <strong>lot</strong> of time when working with very large files. Experienced this when working with BLAST results.)</li>
-<li><code>-x</code>: <code>--line-regexp</code>, select only those matches that <strong>exactly match the whole line</strong>. For regular expression patterns, this is like parenthesizing each pattern and then surrounding it with ‘v’ and ‘$’</li>
-<li><code>-v</code>: <code>--invert-match</code>, <strong>invert</strong> the sense of matching, to select non-matching lines</li>
-<li><code>-f</code>: <code>--file=<em>file</em></code>, obtain patterns from <em>file</em>, one per line. If this option is used multiple times or is combined with the <code>-e</code> option, search for all patterns, given. The empty file contains zero pattern, and therefore matches nothing</li>
+<h2 id="Verbal-representation-of-the-difference"><a href="#Verbal-representation-of-the-difference" class="headerlink" title="Verbal representation of the difference"></a>Verbal representation of the difference</h2><ul>
+<li><em>Executing</em><ul>
+<li>Runs all the commands in a new/separate shell. </li>
+<li>Any changes to the environment as a result of the commands only apply to the new shell. This means the environment in the current shell remains untouched.</li>
 </ul>
-<h2 id="Possible-improvement"><a href="#Possible-improvement" class="headerlink" title="Possible improvement"></a>Possible improvement</h2><p>So I was trying to directly obtain the difference between 2 SQLite databases. I wanted to see which rows are missing in one of them since I expected them to be the same. I considered making use of the <a href="https://sqlite.org/cli.html" target="_blank" rel="noopener">command line program for SQLite</a>, specifically the command <code>sqldiff</code> but since it would give me differences in the <strong>schema</strong> instead, that would transform one database to another. While this may give me a hint of the differences, it would be great to directly obtain the missing rows in a SQLite database (a one-liner solution or something).</p>
+</li>
+<li><em>Sourcing</em><ul>
+<li>Runs all the commands in the current shell. </li>
+<li>Any changes to the environment resulting from the commands will apply in the current shell.</li>
+</ul>
+</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it" target="_blank" rel="noopener">What is the difference between executing a Bash script vs sourcing it?</a></p>
 
         </div>
 
@@ -246,13 +253,9 @@
                     
                         <a href="/tags/linux/"># linux</a>
                     
-                        <a href="/tags/grep/"># grep</a>
+                        <a href="/tags/executing/"># executing</a>
                     
-                        <a href="/tags/difference/"># difference</a>
-                    
-                        <a href="/tags/txt/"># txt</a>
-                    
-                        <a href="/tags/csv/"># csv</a>
+                        <a href="/tags/sourcing/"># sourcing</a>
                     
                         
                 </span>
@@ -265,10 +268,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/05/01/t4/">How to specify bold or italic in Markdown inline code</a>
+                <a class="prev" rel="prev" href="/2020/04/10/t2/">How to use Bash to get the values in a specific field of a csv file (WITHOUT grep/cut)</a>
             
             
-            <a class="next" rel="next" href="/2020/04/09/t2/">How to use Bash to get the values in a specific field of a csv file (WITHOUT grep/cut)</a>
+            <a class="next" rel="next" href="/2020/04/08/p1/">Identifying the Source of Virulence</a>
             
         </section>
 
