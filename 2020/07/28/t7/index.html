@@ -205,14 +205,14 @@
 <li>Say you have the list <code>[1,3,4,5,5,6,6,6]</code>. The expected output should be <strong>5</strong>.</li>
 </ul>
 <h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><ul>
-<li>Use <code>set()</code> to filter out any duplicate numbers.</li>
-<li>Use <code>sorted()</code> to sort the numbers in ascending order. Can specify <code>reverse = True</code> if descending order is desired.</li>
+<li>Use <code>set</code> to filter out any duplicate numbers.</li>
+<li>Use <code>sorted</code> to sort the numbers in ascending order. Can specify <code>reverse = True</code> if descending order is desired.</li>
 <li>Then access the second last number in the list by <strong>indexing</strong>.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># first remove duplicates</span></span><br><span class="line">no_duplicates = set(alist)</span><br><span class="line"></span><br><span class="line"><span class="comment"># then sort the list and access second last item</span></span><br><span class="line">print(sorted(no_duplicates)[<span class="number">-2</span>])</span><br></pre></td></tr></table></figure>
 <p><em>And you will get 5!</em></p>
 <h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
-<li>More on slicing/indexing <a href="https://www.blog.duomly.com/slicing-in-python-what-is-it/" target="_blank" rel="noopener">here</a></li>
+<li>More on slicing/indexing <a href="https://www.blog.duomly.com/slicing-in-python-what-is-it/" target="_blank" rel="noopener">here</a>.</li>
 </ul>
 
         </div>
