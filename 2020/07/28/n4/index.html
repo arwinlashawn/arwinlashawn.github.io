@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>What is Python Inheritance in OOP? | Arwin Lashawn | Codes</title>
+<title>Difference Between List and Array in Python | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">What is Python Inheritance in OOP?</h1>
+            <h1 class="post-title">Difference Between List and Array in Python</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 28, 2020&nbsp;&nbsp;21:51:50</a>
+                        Date: <a href="#">July 28, 2020&nbsp;&nbsp;22:29:31</a>
                         </span>
                     
                     
@@ -200,18 +200,28 @@
         </header>
 
         <div class="post-content">
-            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>After having written some notes on the four pillars of OOP, I did not quite understand what inheritance means. Decided to explore examples and finally understood it better.</em></p>
-<h2 id="The-gist"><a href="#The-gist" class="headerlink" title="The gist"></a>The gist</h2><ul>
-<li>Inheritance enables creating a new class using attributes and methods of an existing class.</li>
-<li>The class from which attributes and methods are inherited from is called the <strong>superclass</strong>.</li>
-<li>The class which inherits the attributes and methods from the superclass is called the <strong>subclass</strong>.</li>
+            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>Never really took the time to clearly distinguish the differences between the two. Here we go.</em></p>
+<h2 id="Main-difference"><a href="#Main-difference" class="headerlink" title="Main difference"></a>Main difference</h2><ul>
+<li>An array stores values of the <strong>same data type</strong>.</li>
+<li>A list can store values of <strong>different data types</strong>.</li>
 </ul>
-<p><em>This note will only talk about single inheritance. Multiple inheritance next time?</em></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># superclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Bird is ready"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">whoisThis</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Bird"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swim</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Swim faster"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># subclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Penguin</span><span class="params">(Bird)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># this is where you inherit the Bird class</span></span><br><span class="line">        Bird.__init__(self)</span><br><span class="line">        print(<span class="string">"Penguin is ready"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">whoisThis</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Penguin"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Run faster"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">### OUTPUT TEST ###</span></span><br><span class="line">peggy = Penguin() <span class="comment"># prints "Bird is ready" and "Penguin is ready". This shows inheritance of the Bird class. BUT</span></span><br><span class="line"></span><br><span class="line">peggy.whoisThis() <span class="comment"># prints "Penguin" but not "Bird" (modified deu to inheritance!)</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="Other-differences-features-of-arrays"><a href="#Other-differences-features-of-arrays" class="headerlink" title="Other differences/features of arrays"></a>Other differences/features of arrays</h2><ul>
+<li>In order to use arrays in Python, you have to import the <strong>array</strong> module. Reason? It is not a fundamental data type.</li>
+<li>Declaring an array looks something like this:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> array <span class="keyword">import</span> *</span><br><span class="line">my_array = array(<span class="string">'i'</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure></li>
+<li>Notice that it does not look as simple as declaring a list. Here&#39;s why*.</li>
+</ul>
+<h2 id="Syntax-of-declaring-array"><a href="#Syntax-of-declaring-array" class="headerlink" title="Syntax of declaring array"></a>Syntax of declaring array</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> array <span class="keyword">import</span> *</span><br><span class="line">arrayName = array(typecode, [Initializers])</span><br></pre></td></tr></table></figure>
+<p>The <strong>typcedode</strong> tells python the <strong>type</strong> of array. There are 13 typecodes altogether.</p>
+<h2 id="Similarities-yes"><a href="#Similarities-yes" class="headerlink" title="Similarities (yes!)"></a>Similarities (yes!)</h2><p>There are many built-in methods that be used on <strong>BOTH</strong> lists and arrays. To name a few (full list of methods can be seen <a href="https://www.w3schools.com/python/python_ref_list.asp#:~:text=Python%20has%20a%20set%20of,can%20use%20on%20lists%2Farrays.&text=Note%3A%20Python%20does%20not%20have,Lists%20can%20be%20used%20instead." target="_blank" rel="noopener">here</a>):</p>
+<ul>
+<li><code>append()</code></li>
+<li><code>pop()</code></li>
+<li><code>sort()</code></li>
+</ul>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Just don&#39;t use arrays in Python if you don&#39;t have to.</p>
 <h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
-<li><a href="https://www.journaldev.com/14633/python-inheritance-example" target="_blank" rel="noopener">Python Inheritance Example</a></li>
-<li><a href="https://www.programiz.com/python-programming/object-oriented-programming" target="_blank" rel="noopener">Python Object Oriented Programming</a></li>
+<li><a href="https://www.thegeekstuff.com/2013/08/python-array/#:~:text=An%20array%20is%20a%20data,corresponding%20to%20same%20data%20type." target="_blank" rel="noopener">15 Python Array Examples – Declare, Append, Index, Remove, Count</a></li>
+<li><a href="https://www.w3schools.com/python/python_ref_list.asp#:~:text=Python%20has%20a%20set%20of,can%20use%20on%20lists%2Farrays.&text=Note%3A%20Python%20does%20not%20have,Lists%20can%20be%20used%20instead." target="_blank" rel="noopener">Python List/Array Methods</a></li>
 </ol>
 
         </div>
@@ -241,13 +251,11 @@
                 <span class="tag">
                     
                     
+                        <a href="/tags/array/"># array</a>
+                    
                         <a href="/tags/python/"># python</a>
                     
-                        <a href="/tags/oop/"># oop</a>
-                    
-                        <a href="/tags/inheritance/"># inheritance</a>
-                    
-                        <a href="/tags/super/"># super</a>
+                        <a href="/tags/list/"># list</a>
                     
                         
                 </span>
@@ -260,10 +268,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/28/n4/">Difference Between List and Array in Python</a>
             
-            
-            <a class="next" rel="next" href="/2020/07/28/n2/">Difference Between Class and Object (OOP)</a>
+            <a class="next" rel="next" href="/2020/07/28/n3/">What is Python Inheritance in OOP?</a>
             
         </section>
 
