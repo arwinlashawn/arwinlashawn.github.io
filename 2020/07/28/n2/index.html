@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>The Four Pillars of Object Oriented Programming (OOP) in Python | Arwin Lashawn | Codes</title>
+<title>Difference Between Class and Object (OOP) | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">The Four Pillars of Object Oriented Programming (OOP) in Python</h1>
+            <h1 class="post-title">Difference Between Class and Object (OOP)</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 28, 2020&nbsp;&nbsp;17:28:50</a>
+                        Date: <a href="#">July 28, 2020&nbsp;&nbsp;18:09:55</a>
                         </span>
                     
                     
@@ -200,37 +200,35 @@
         </header>
 
         <div class="post-content">
-            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>My first ever coding interview made me realize how bad I was at OOP. This is one of my many efforts to reinforce my understanding about it.</em></p>
-<h2 id="Reminder"><a href="#Reminder" class="headerlink" title="Reminder"></a>Reminder</h2><p>Python is an <strong>OOP</strong> language. Unlike procedure oriented programming which focuses on functions, OOP focus on <strong>objects</strong>.</p>
-<h2 id="What-are-the-four-pillars-of-OOP"><a href="#What-are-the-four-pillars-of-OOP" class="headerlink" title="What are the four pillars of OOP?"></a>What are the four pillars of OOP?</h2><ul>
-<li>Abstraction</li>
-<li>Encapsulation</li>
-<li>Inheritance</li>
-<li>Polymorphism</li>
+            <h3 id="Simply-put"><a href="#Simply-put" class="headerlink" title="Simply put"></a>Simply put</h3><p><em>An object is an <strong>instance</strong> of a class</em>.</p>
+<p>OR</p>
+<p><em>A class is a blueprint/construct that <strong>encapsulates</strong> a group of variables and methods while an object acts as a <strong>member</strong> of that class.</em></p>
+<hr>
+<p>If that is not enough…</p>
+<h3 id="Class-definition-according-to-the-documentation"><a href="#Class-definition-according-to-the-documentation" class="headerlink" title="Class definition according to the documentation"></a>Class definition according to the documentation</h3><ul>
+<li>Class<ul>
+<li>Classes provide a means of bundling data and functionality together (<em>encapsulation!</em>). Creating a new class creates a new type of object, allowing new instances of that type to be made. Each class instance can have attributes attached to it for maintaining its state. Class instances can also have methods (defined by its class) for modifying its state.</li>
 </ul>
-<p><em>One way to remember this is “<strong>A</strong> n <strong>E</strong> ven <strong>I</strong> nteresting <strong>P</strong> ie&quot;.</em></p>
-<h3 id="Abstraction-of-Data"><a href="#Abstraction-of-Data" class="headerlink" title="Abstraction (of Data)"></a>Abstraction (of Data)</h3><ul>
-<li>In other words, <strong>hiding/concealing of information</strong>. A process of displaying only necessary features</li>
-<li>Goal: So users only see what they want to see</li>
-<li>Example: Think navigation to a more specific section of an app.</li>
+</li>
 </ul>
-<h3 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h3><ul>
-<li>Encapsulates or <strong>wraps</strong> all related data into a single unit (usually a class). </li>
-<li>Goal: Prevents direct modification of existing data from occurring, thus improving data security and maintenance.</li>
-<li>Example: Think having all the relevant functions within a class for the purpose of opening <em>Settings</em> on your phone. In the future, any changes you want to make to <em>Settings</em> only need to be made within that class.</li>
+<hr>
+<p>Now let&#39;s compare class and object.</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><ul>
+<li>A blueprint, from which you can create an instance</li>
+<li>Used to bind data and methods as a <strong>single unit</strong></li>
+<li>An undefined class does not require memory allocation.</li>
+<li>Needs to be declared <strong>only once</strong></li>
 </ul>
-<h3 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h3><ul>
-<li>A method of creating a new class for using (inheriting) members of an already existing class .</li>
-<li>Goal: Improves code maintenance as no modification needs to be done to existing classes</li>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
+<li>An instance of a class (blueprint)</li>
+<li>Acts like a <strong>variable</strong> of the class</li>
+<li>Requires memory allocation</li>
+<li>Can be declared more than once</li>
 </ul>
-<h3 id="Polymorphism-Could-be-tricky"><a href="#Polymorphism-Could-be-tricky" class="headerlink" title="Polymorphism (Could be tricky)"></a>Polymorphism (Could be tricky)</h3><ul>
-<li>Provides a way to redefine methods for <strong>derived classes</strong>.</li>
-<li>I find this example the best way to understand polymorphism at work:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parrot</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Parrot can fly"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swim</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Parrot can't swim"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Penguin</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Penguin can't fly"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swim</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Penguin can swim"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># common interface</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flying_test</span><span class="params">(bird)</span>:</span></span><br><span class="line">    bird.fly()</span><br><span class="line"></span><br><span class="line"><span class="comment">#instantiate objects</span></span><br><span class="line">blu = Parrot()</span><br><span class="line">peggy = Penguin()</span><br><span class="line"></span><br><span class="line"><span class="comment"># passing the object</span></span><br><span class="line">flying_test(blu)</span><br><span class="line">flying_test(peggy)</span><br><span class="line"></span><br><span class="line"><span class="comment">### OUTPUT ###</span></span><br><span class="line"><span class="comment"># Parrot can fly</span></span><br><span class="line"><span class="comment"># Penguin can't fly</span></span><br></pre></td></tr></table></figure></li>
-<li>This is possible because both classes have <strong>the same method name</strong> i.e. <code>fly()</code>.</li>
-</ul>
+<h3 id="Last-thing"><a href="#Last-thing" class="headerlink" title="Last thing"></a>Last thing</h3><p>Almost everything is an object.</p>
 <h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
-<li><a href="https://www.programiz.com/python-programming/object-oriented-programming" target="_blank" rel="noopener">Python Object Oriented Programming</a></li>
-<li><a href="https://medium.com/@hamzzza.ahmed95/four-pillars-of-object-oriented-programming-oop-e8d7822aa219" target="_blank" rel="noopener">Four Pillars of Object Oriented Programming (OOP)</a></li>
+<li><a href="https://stackoverflow.com/questions/7483947/what-is-the-difference-between-objects-and-classes-in-python" target="_blank" rel="noopener">What is the difference between objects and classes in Python</a></li>
+<li><a href="https://www.w3schools.in/java-questions-answers/difference-between-classes-objects/#:~:text=Classes%20and%20objects%20from%20the,or%20instance%20of%20that%20class.&text=A%20class%20is%20a%20blueprint,the%20instance%2C%20i.e.%2C%20objects." target="_blank" rel="noopener">What Is the Difference Between Classes and Objects?</a></li>
 </ol>
 
         </div>
@@ -264,7 +262,9 @@
                     
                         <a href="/tags/oop/"># oop</a>
                     
-                        <a href="/tags/object-oriented-programming/"># object oriented programming</a>
+                        <a href="/tags/object/"># object</a>
+                    
+                        <a href="/tags/class/"># class</a>
                     
                         
                 </span>
@@ -277,10 +277,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/28/t9/">Difference Between Class and Object (OOP)</a>
+                <a class="prev" rel="prev" href="/2020/07/28/n3/">What is Python Inheritance in OOP?</a>
             
             
-            <a class="next" rel="next" href="/2020/07/28/t7/">How to find the second biggest number in a Python list that may contain duplicates</a>
+            <a class="next" rel="next" href="/2020/07/28/n1/">The Four Pillars of Object Oriented Programming (OOP) in Python</a>
             
         </section>
 
