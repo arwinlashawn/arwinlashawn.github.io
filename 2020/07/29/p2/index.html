@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Arwin Lashawn">
+
+
+
+
+    <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
+
+
+<title>Understanding the Role of Genes in Obesity | Arwin Lashawn | Codes</title>
+
+
+
+    <link rel="icon" href="/avatar1.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Arwin Lashawn | Codes</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Arwin Lashawn | Codes</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Understanding the Role of Genes in Obesity</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Arwin Lashawn</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 29, 2020&nbsp;&nbsp;10:39:28</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/projects/">projects</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Obesity-The-Role-of-Genes"><a href="#Obesity-The-Role-of-Genes" class="headerlink" title="Obesity: The Role of Genes"></a>Obesity: The Role of Genes</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obesity is a medical condition that occurs when a person carries excess weight or body fat that might affect their health. There is a lot of speculation as to what the main cause of obesity is whether it be due to environmental factors or from a person’s genetic composition.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The reason why we have decided to look into obesity is because the rate of obesity has increased rapidly over the years, especially here in the United States.</p>
+<blockquote>
+<p><img src="https://i.imgur.com/W5g8Jgv.png" alt=""><br>Figure 1: Graph representing the prevalence of obesity in the United States<br><em>Source: <a href="https://www.usnews.com/news/data-mine/articles/2018-03-26/sharp-increase-in-obesity-rates-over-last-decade-federal-data-show" target="_blank" rel="noopener">https://www.usnews.com/news/data-mine/articles/2018-03-26/sharp-increase-in-obesity-rates-over-last-decade-federal-data-show</a></em></p>
+</blockquote>
+<p>The uncertainty of how much obesity is influenced by genetic factors led us to these questions:</p>
+<ol>
+<li><em>Is obesity correlated to the genetic makeup of an individual?</em></li>
+<li><em>If so, are there specific genes that are correlated with the trait of obesity?</em></li>
+<li><em>If so, are the SNPs in those genes significant?</em></li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By first focusing on the significantly correlated genes, we then made a further analysis on SNPs located on those genes. We assume that if the certain genes are highly correlated with obesity, the SNPs located on those genes should also be significantly correlated to the disease. An even further analysis was conducted by using OR (Odds Ratio) values of the SNPs being investigated. We will assess if that assumption is true by making use of two different but complementary databases, integrating their data, and visualizing those data. This new integrated data table will allow us to answer the questions above as well. </p>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Knowing that we required databases that show gene-disease and SNP-disease correlations, we decided to utilize and integrate the  GWAS Catalog (<a href="https://www.ebi.ac.uk/gwas/home" target="_blank" rel="noopener">https://www.ebi.ac.uk/gwas/home</a>) and DisGeNET (<a href="http://www.disgenet.org/home/" target="_blank" rel="noopener">http://www.disgenet.org/home/</a>) data bases. </p>
+<h3 id="Database-1-DisGeNET"><a href="#Database-1-DisGeNET" class="headerlink" title="Database 1 - DisGeNET"></a>Database 1 - DisGeNET</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The DisGeNET database integrates information of human gene-disease associations (GDAs) and variant-disease associations (VDAs) from various repositories including Mendelian, complex and environmental diseases.We looked into the trait of obesity on DISGENET, looking under the Gene Disease Summary category. We then downloaded the .tsv file from there. </p>
+<h3 id="Database-2-GWAS-Catalog"><a href="#Database-2-GWAS-Catalog" class="headerlink" title="Database 2 - GWAS Catalog"></a>Database 2 - GWAS Catalog</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GWAS is a database that looks at the different variants of a given gene, trait, or disease. We looked up the IL6 gene on the  GWAS catalog browser and downloaded the data table of the gene as a .tsv file.</p>
+<h3 id="Data-Integration"><a href="#Data-Integration" class="headerlink" title="Data Integration"></a>Data Integration</h3><ol>
+<li>Packages that would be useful for data cleaning and integration were first loaded into RStudio. <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library(dplyr) </span><br><span class="line">library(tidyr) </span><br><span class="line">library(readr)</span><br><span class="line">library(ggplot2)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br>
+
+<ol start="2">
+<li>The two .tsv files were then loaded.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dis &lt;- read_tsv(file&#x3D;&#39;obes_gda.tsv&#39;)</span><br><span class="line">gwas &lt;- read_tsv(file&#x3D;&#39;obes_gwas.tsv&#39;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br>
+
+<ol start="3">
+<li>After observing the columns of both tables carefully, only important columns were selected for integration.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">glimpse(dis)</span><br><span class="line">dis_selected &lt;- select(dis, Gene, Gene_id, UniProt, Gene_Full_Name, Protein_Class, N_diseases_g,</span><br><span class="line">                       DSI_g, DPI_g, pLI, Score_gda, N_SNPs_gda)</span><br><span class="line">glimpse(gwas)</span><br><span class="line">gwas_selected &lt;- select(gwas, REGION, CHR_ID, CHR_POS, &#96;REPORTED GENE(S)&#96;, &#96;STRONGEST SNP-RISK ALLELE&#96;,</span><br><span class="line">                        SNPS, CONTEXT, &#96;RISK ALLELE FREQUENCY&#96;, &#96;P-VALUE&#96;, PVALUE_MLOG, &#96;OR or BETA&#96;, </span><br><span class="line">                        &#96;95% CI (TEXT)&#96;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br>
+
+<ol start="4">
+<li>To make sure every row is unique before joining the two dataset, the command “unique()” was used.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gwas_unique &lt;- unique(gwas_selected)</span><br><span class="line">View(gwas_unique)</span><br><span class="line">dis_unique &lt;- unique(dis_selected)</span><br><span class="line">View(dis_unique)</span><br></pre></td></tr></table></figure>
+The number of observations remained the same after the code above was run.</li>
+</ol>
+<br>
+
+<ol start="5">
+<li>The two tables were then joined by using the common column containing gene names.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">joined &#x3D; left_join(dis_unique,gwas_unique,by&#x3D;c(&#39;Gene&#39; &#x3D; &#39;REPORTED GENE(S)&#39;))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br>
+
+<ol start="6">
+<li>The joined table contained 2018 observations and 22 variables. It was observed that for most of the genes, no SNPs were available. Therefore the rows without any specified SNP were removed i.e. rows containing “NA”, leaving us with 113 observations.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">final_table &#x3D; filter(joined,!is.na(SNPS))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<br>
+
+<ol start="7">
+<li>The final table was then exported into a .tsv file for further observation and analysis.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write.table(final_table, file&#x3D;&#39;final_table.tsv&#39;, quote&#x3D;FALSE, sep&#x3D;&#39;\t&#39;, row.names &#x3D; FALSE)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="Attached-Files"><a href="#Attached-Files" class="headerlink" title="Attached Files"></a>Attached Files</h3><ul>
+<li>DisGeNET dataset for obesity (obes_gda.tsv)</li>
+<li>GWAS Catalog dataset for obesity (obes_gwas.tsv)</li>
+<li>Integrated table (final_table.tsv)</li>
+</ul>
+<hr>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>We integrated our two databases successfully by using gene name, which is the common column between the two databases. </p>
+<br>
+
+<h3 id="What-are-the-genes-with-high-GDA-scores"><a href="#What-are-the-genes-with-high-GDA-scores" class="headerlink" title="What are the genes with high GDA scores?"></a>What are the genes with high GDA scores?</h3><p>After filtering the genes for those with a GDA score higher than 0.4, the GDA scores are plotted against their respective genes. The genes with the highest GDA scores in descending order are <strong>MC4R, ILEPR, followed by IRS1</strong>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">highgda &lt;- filter(final_table, Score_gda &gt; 0.4)</span><br><span class="line">ggplot(highgda, aes(Gene, Score_gda, colour&#x3D;Score_gda)) + geom_point() + ggtitle(&quot;GDA Score vs Gene&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="https://i.imgur.com/jhQwCZp.png" alt=""><br>Figure 2: Represents the association of gene and Obesity using GDA scores.</p>
+</blockquote>
+<br>
+
+<h3 id="Which-chromosomes-are-those-genes-located-on"><a href="#Which-chromosomes-are-those-genes-located-on" class="headerlink" title="Which chromosomes are those genes located on?"></a>Which chromosomes are those genes located on?</h3><p>By using the same genes shown in the graph above, the chromosomal locations of those genes were visualized as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggplot(highgda, aes(CHR_ID, Gene, colour&#x3D;Gene)) + geom_point() + ggtitle(&quot;Gene vs Chromosome Number&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="https://i.imgur.com/BMdqDIj.png" alt=""><br>Figure 3: Represents which chromosomes the genes are on </p>
+</blockquote>
+<br>
+
+<h3 id="Do-SNPs-on-those-genes-have-high-p-values"><a href="#Do-SNPs-on-those-genes-have-high-p-values" class="headerlink" title="Do SNPs on those genes have high p-values?"></a>Do SNPs on those genes have high p-values?</h3><p>To determine whether SNPs on those genes do indeed have high p-values, the log of p-values of those SNPs were plotted against their corresponding gene names:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggplot(highgda, aes(Gene, PVALUE_MLOG, colour&#x3D;PVALUE_MLOG)) + geom_point() + ggtitle(&quot;Log SNP P-values vs Corresponding Genes&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="https://i.imgur.com/s92h3Tk.png" alt=""><br>Figure 4: Visualizes the correlation between genes with high GDA scores and the p-values of corresponding SNPs</p>
+</blockquote>
+<br>
+
+<h3 id="Do-SNPs-on-those-genes-also-have-high-OR"><a href="#Do-SNPs-on-those-genes-also-have-high-OR" class="headerlink" title="Do SNPs on those genes also have high OR?"></a>Do SNPs on those genes also have high OR?</h3><p>This analysis is a further step which was implemented to help further reinforce the fact that a gene is indeed highly associated with obesity. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">colnames(highgda)[21] &lt;- &quot;OR&quot;</span><br><span class="line">ggplot(highgda, aes(Gene, OR, colour&#x3D;OR)) + geom_point() + ggtitle(&quot;OR vs Gene&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="https://i.imgur.com/nXtwjAW.png" alt=""><br>Figure 5: Visualizes the relationship between OR of SNPs and their corresponding genes with high GDA scores</p>
+</blockquote>
+<hr>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><h3 id="What-is-GDA-score"><a href="#What-is-GDA-score" class="headerlink" title="What is GDA score?"></a>What is GDA score?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDA score stands for gene-disease association score; the higher the score, the more significant its association is with a particular disease. The GDA score is influenced by the number of curated sources and publications that support that particular GDA. Curated sources from CGI, CLINGEN, GENOMICS ENGLAND, CTD, PSYGENET, ORPHANET, UNIPROT have the highest weight, contributing up to 0.6 score if at least two curated sources support a particular GDA. Further information on how GDA is calculated can be accessed through this link: <a href="http://www.disgenet.org/dbinfo" target="_blank" rel="noopener">http://www.disgenet.org/dbinfo</a></p>
+<h3 id="Significance-of-our-analysis"><a href="#Significance-of-our-analysis" class="headerlink" title="Significance of our analysis"></a>Significance of our analysis</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a lot of genes that have some sort of association with obesity represented by this plot. From our observation, it seems that <strong>the gene most associated with obesity is MC4R.</strong> In Figure 3, it depicts the position of the different genes on the individual chromosomes to better identify where these genes are located in the genome. We can better understand where the affected gene that leads to obesity lies in the genome due to this plot. Figure 4 then demonstrates the various SNPs and what genes they appear in. It also indicates the significance of those SNPs by their log of p-values; the higher the value, the more significant it is. In the same graph, the FTO gene is seen to have a large number of significant SNPs overall. However, we saw on our graph in Figure 2 that the FTO gene did not have a strong GDA value. This means that just because there are multiple significant SNPs in a gene that it does not definitively correlate to being associated with a disease. Therefore, our integrated table is important in bridging the knowledge between disease association in a gene and the presence of SNPs in those genes. Using OR values is then a potential further analysis that one might implement to reinforce any sort of significance observed for a particular gene. Odds ratio is the ratio of the probability of having a disease given the presence of an allele over the probability of having a disease given the absence of that allele.</p>
+<h3 id="Further-utilization-of-our-integrated-data-table"><a href="#Further-utilization-of-our-integrated-data-table" class="headerlink" title="Further utilization of our integrated data table"></a>Further utilization of our integrated data table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From our new integrated data table there are many possibilities as to what to do with the new data set. From our integrated data table, the correlation between genes and obesity can be identified a lot more efficiently. Determining the correlation between SNPs and obesity is made easier because there are multiple statistical scores we can consider with the new data table. We can do this given the ability to correlate the GDA values and the p-values. We can also identify which specific SNPs might induce the expression of obesity in certain genes. Another score that provides more dimension to the analysis is the OR value. <strong>With all three of these values we could devise a method or strategy for determining the correlation between a gene and a specific trait. This method would utilize the p-values, GDA scores, and the OR values to create a multidimensional analysis of a gene that will report if it is directly the precursor for a specific disease.</strong></p>
+<h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the beginning phase of data analysis, we almost used the joined table without first removing the empty rows. Those rows were empty as a result of SNPs not being present in certain genes. We learned that it is important to first carefully observe integrated data as empty rows may be produced as a result of joining two datasets together. Another alternative is to first observe the data tables separately and making the necessary changes before joining them.</p>
+<h3 id="Room-for-improvement"><a href="#Room-for-improvement" class="headerlink" title="Room for improvement"></a>Room for improvement</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In conclusion, our integrated data table is rich with data but there is definitely a lot that could still be improved. One room for improvement is to integrate gene expression data into our existing data table. Our current data set can explain genes and where they are located in the genome but it does not tell us whether that gene is expressed or not, and if it is, how much it is expressed. Information like this can provide greater context as to which SNPs are actually expressed and which are not. Another improvement could also be to integrate information on co-expression. Given this data set we assume that obesity is only expressed due to one gene whereas realistically there could be many genes that could contribute to its expression.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Arwin Lashawn</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/bioinformatics/"># bioinformatics</a>
+                    
+                        <a href="/tags/r/"># r</a>
+                    
+                        <a href="/tags/obesity/"># obesity</a>
+                    
+                        <a href="/tags/genes/"># genes</a>
+                    
+                        <a href="/tags/dplyr/"># dplyr</a>
+                    
+                        <a href="/tags/tidyr/"># tidyr</a>
+                    
+                        <a href="/tags/readr/"># readr</a>
+                    
+                        <a href="/tags/ggplot2/"># ggplot2</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/07/28/n4/">Difference Between List and Array in Python</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Arwin Lashawn | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
