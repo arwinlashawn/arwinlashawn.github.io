@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>How to specify two decimals for float in Python 3 (F-strings) | Arwin Lashawn | Codes</title>
+<title>How to reverse a string in Python without using &#39;reversed&#39; function | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to specify two decimals for float in Python 3 (F-strings)</h1>
+            <h1 class="post-title">How to reverse a string in Python without using &#39;reversed&#39; function</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +184,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 30, 2020&nbsp;&nbsp;12:52:59</a>
+                        Date: <a href="#">August 4, 2020&nbsp;&nbsp;13:07:59</a>
                         </span>
                     
                     
@@ -200,14 +200,16 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p><em>Was working on a <a href="https://www.hackerrank.com/challenges/finding-the-percentage/problem" target="_blank" rel="noopener">HackerRank challenge</a> and I found myself wondering what the cleanest solution should look like. F-strings!</em></p>
-<h3 id="Example-problem"><a href="#Example-problem" class="headerlink" title="Example problem"></a>Example problem</h3><p>Given the list of scores: <code>[10, 20, 30]</code>, give the average value correct to <strong>2 decimal places</strong>.</p>
-<h3 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h3><p>This solution should work for any list containing integers regardless of length.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scores = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># notice usage of f-strings</span></span><br><span class="line">print(<span class="string">f"<span class="subst">&#123;sum(scores)/len(scores):<span class="number">.2</span>f&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
-<p><em>Neat, right?</em></p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://realpython.com/python-f-strings/" target="_blank" rel="noopener">Python 3&#39;s f-Strings: An Improved String Formatting Syntax (Guide)</a></li>
-<li><a href="https://stackoverflow.com/questions/14540143/python-3-float-decimal-points-precision" target="_blank" rel="noopener">Python 3 Float Decimal Points/Precision</a></li>
+            <h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ul>
+<li>Use of a for loop and <code>range()</code></li>
+</ul>
+<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><ul>
+<li>Trick is to get index of each string character in reverse fashion then use the indices to slice the string backwards <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(astring)</span>:</span></span><br><span class="line">	rev = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(astring), <span class="number">0</span>, <span class="number">-1</span>) <span class="comment"># start, end, step</span></span><br><span class="line">		rev += astring[i<span class="number">-1</span>] <span class="comment"># add the last character of rev and so on </span></span><br><span class="line">	<span class="keyword">return</span> rev</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
+<li><a href="https://stackoverflow.com/questions/7961499/best-way-to-loop-over-a-python-string-backwards" target="_blank" rel="noopener">Best way to loop over a python string backwards</a></li>
 </ol>
 
         </div>
@@ -239,11 +241,11 @@
                     
                         <a href="/tags/python/"># python</a>
                     
-                        <a href="/tags/python3/"># python3</a>
+                        <a href="/tags/reverse/"># reverse</a>
                     
-                        <a href="/tags/float/"># float</a>
+                        <a href="/tags/reversed/"># reversed</a>
                     
-                        <a href="/tags/fstrings/"># fstrings</a>
+                        <a href="/tags/string/"># string</a>
                     
                         
                 </span>
@@ -256,10 +258,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/08/04/t9/">How to reverse a string in Python without using 'reversed' function</a>
             
-            
-            <a class="next" rel="next" href="/2020/07/29/p2/">Understanding the Role of Genes in Obesity</a>
+            <a class="next" rel="next" href="/2020/07/30/t8/">How to specify two decimals for float in Python 3 (F-strings)</a>
             
         </section>
 
