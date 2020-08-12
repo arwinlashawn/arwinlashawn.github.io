@@ -14,7 +14,7 @@
     <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
 
 
-<title>How to reverse a string in Python without using &#39;reversed&#39; function | Arwin Lashawn | Codes</title>
+<title>Introduction to Machine Learning (Python) | Arwin Lashawn | Codes</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">How to reverse a string in Python without using &#39;reversed&#39; function</h1>
+            <h1 class="post-title">Introduction to Machine Learning (Python)</h1>
             
                 <div class="post-meta">
                     
@@ -184,14 +184,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">August 4, 2020&nbsp;&nbsp;13:07:59</a>
+                        Date: <a href="#">August 12, 2020&nbsp;&nbsp;18:02:39</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/python-tutorials/">python tutorials</a>
+                                <a href="/categories/machine-learning/">machine learning</a>
                             
                         </span>
                     
@@ -200,19 +200,47 @@
         </header>
 
         <div class="post-content">
-            <h3 id="Reminder"><a href="#Reminder" class="headerlink" title="Reminder"></a>Reminder</h3><ul>
-<li>It is possible to iterate over strings! No need to split string into lists for that matter. (<em>Unless you have to reverse a text! Example: &quot;I love you&quot; to &quot;you love I&quot;</em>). Related reading: <a href="https://medium.com/@hmurari/a-popular-programming-interview-question-reverse-words-of-a-sentence-3bac606d15a2" target="_blank" rel="noopener">Best way to loop over a python string backwards</a></li>
+            <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>I have always found data science fascinating but never bothered giving machine learning a shot. This is my effort to understand what it is.</em></p>
+<h2 id="What-is-machine-learning"><a href="#What-is-machine-learning" class="headerlink" title="What is machine learning?"></a>What is machine learning?</h2><p>The application of AI that provides systems the ability to automatically learn and improve from <strong>experience</strong>. The process of learning is enabled by observations of data. Based on the data observed, trends/patterns can be figured out by the system. Take Spotify music recommendations as an example. Their suggestions will improve as you play more songs.</p>
+<blockquote>
+<p>A machine learning system takes <strong>inputs and outputs</strong>. The inputs are often called <strong>features</strong> while the outputs are usually called <strong>labels</strong>.</p>
+</blockquote>
+<p>Some definitions:</p>
+<ul>
+<li>Features: Measurable variables affecting a scientific experiment. The machine learning system would then try to <em>distinguish relevant patterns</em> between them. The patterns are then used to generate the outputs.</li>
+<li>Labels: The outputs are called labels because they are assumed to belong to certain categories.</li>
 </ul>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ul>
-<li>Use of a for loop and <code>range()</code></li>
+<blockquote>
+<p>Machine learning algorithms are typically categorized as supervised or unsupervised. Will be focusing on <strong>supervised learning</strong> here. <em>Classification is a type of supervised learning</em>.</p>
+</blockquote>
+<p>Some definitions:</p>
+<ul>
+<li>Supervised learning: Means that the input to a machine learning network has already been labeled, with important features already separated into distinct categories. Therefore:<ul>
+<li>The machine learning network knows which parts of the input are important</li>
+<li>There is a ground truth that the network can check itself against</li>
 </ul>
-<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><ul>
-<li>Trick is to get index of each string character in reverse fashion then use the indices to slice the string backwards <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(astring)</span>:</span></span><br><span class="line">	rev = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(astring), <span class="number">0</span>, <span class="number">-1</span>) <span class="comment"># start, end, step</span></span><br><span class="line">		rev += astring[i<span class="number">-1</span>] <span class="comment"># add the last character of rev and so on </span></span><br><span class="line">	<span class="keyword">return</span> rev</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
+<blockquote>
+<p>The process of <strong>model training</strong> is vital to make a system learn about patterns of a dataset. As the system needs to figure out the patterns, it is only natural that it needs both the features <em>and</em> lables of the training data (the bigger the better). </p>
+</blockquote>
+<blockquote>
+<p>The <strong>testing process</strong> is also important to test what the network has learned so far. Features are fed to it and the prediction accuracy of the labels is observed. The input data fed into the network for testing <strong>should not</strong> be the same as that used for model training. <em>Just imagine taking the exact same test as the practice test given by your professor the week before!</em></p>
+</blockquote>
+<h2 id="What-do-we-need"><a href="#What-do-we-need" class="headerlink" title="What do we need?"></a>What do we need?</h2><p>What better library to use for machine learning than the Python library called <strong>Scikit-Learn</strong>. The library makes machine learning look simple, thanks to the relatively straightfoward syntax of Python and the wonderful functionalities provided by the library itself. </p>
+<h2 id="Classification-methods-made-available-by-Scikit-Learn"><a href="#Classification-methods-made-available-by-Scikit-Learn" class="headerlink" title="Classification methods made available by Scikit-Learn"></a>Classification methods made available by Scikit-Learn</h2><ul>
+<li>K-Nearest Neighbors</li>
+<li>Support Vector Machines</li>
+<li>Decision Tree Classifiers/Random Forests</li>
+<li>Naive Bayes</li>
+<li>Linear Discriminant Analysis</li>
+<li>Logistic Regression</li>
+</ul>
+<h3 id="What-39-s-next"><a href="#What-39-s-next" class="headerlink" title="What&#39;s next?"></a>What&#39;s next?</h3><p>I will dive into how to use the <em>k-nearest neighbors</em> classifier in the next post. The idea behind it is <strong>proximity</strong>; it checks the <strong>distance</strong> from some test example to known values of some training example. The group of data points that would give the smallest distance will be selected.</p>
 <h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
-<li><a href="https://stackoverflow.com/questions/7961499/best-way-to-loop-over-a-python-string-backwards" target="_blank" rel="noopener">Best way to loop over a python string backwards</a></li>
+<li><a href="https://stackabuse.com/overview-of-classification-methods-in-python-with-scikit-learn/" target="_blank" rel="noopener">Overview of Classification Methods in Python with Scikit-Learn</a></li>
+<li><a href="https://expertsystem.com/machine-learning-definition/" target="_blank" rel="noopener">What is Machine Learning? A definition</a></li>
+<li><a href="https://medium.com/sifium/machine-learning-types-of-classification-9497bd4f2e14" target="_blank" rel="noopener">Intro to types of classification algorithms in Machine Learning</a></li>
 </ol>
 
         </div>
@@ -244,11 +272,11 @@
                     
                         <a href="/tags/python/"># python</a>
                     
-                        <a href="/tags/reverse/"># reverse</a>
+                        <a href="/tags/datascience/"># datascience</a>
                     
-                        <a href="/tags/reversed/"># reversed</a>
+                        <a href="/tags/machinelearning/"># machinelearning</a>
                     
-                        <a href="/tags/string/"># string</a>
+                        <a href="/tags/scikit-learn/"># scikit-learn</a>
                     
                         
                 </span>
@@ -261,10 +289,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/08/12/t10/">Introduction to Machine Learning (Python)</a>
             
-            
-            <a class="next" rel="next" href="/2020/07/30/t8/">How to specify two decimals for float in Python 3 (F-strings)</a>
+            <a class="next" rel="next" href="/2020/08/04/t9/">How to reverse a string in Python without using 'reversed' function</a>
             
         </section>
 
