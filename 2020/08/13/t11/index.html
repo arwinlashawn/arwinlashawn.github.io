@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Arwin Lashawn">
+
+
+
+
+    <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash">
+
+
+<title>Using the K-Nearest Neighbors Algorithm with Scikit-Learn (Python) | Arwin Lashawn | Codes</title>
+
+
+
+    <link rel="icon" href="/avatar1.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Arwin Lashawn | Codes</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Arwin Lashawn | Codes</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Using the K-Nearest Neighbors Algorithm with Scikit-Learn (Python)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Arwin Lashawn</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 13, 2020&nbsp;&nbsp;10:37:15</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/machine-learning/">machine learning</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>The K-Nearest Neighbors (KNN) algorithm is a <strong>non-parametric learning algorithm</strong>, meaning that it does not assume anything about the underlying data. The idea behind KNN, <strong>proximity</strong>, is simple, yet it is capable of performing rather complex classifications. Let&#39;s talk about its theory.</p>
+<h2 id="The-theory-behind-KNN"><a href="#The-theory-behind-KNN" class="headerlink" title="The theory behind KNN"></a>The theory behind KNN</h2><h4 id="A-simple-example-of-how-it-works"><a href="#A-simple-example-of-how-it-works" class="headerlink" title="A simple example of how it works"></a>A simple example of how it works</h4><blockquote>
+<p>Say we two classes of training data (red and blue), and the data points are scattered around a graph. One new data point is introduced at a random position of the graph. The (Euclidean/Manhattan) distances between the new data point and training points are calculated. Then any integer, k can be chosen to represent the number of nearest training data points. For that number of nearest data points, the newly introduced data point belongs to the class categorizing the most data points.</p>
+</blockquote>
+<h4 id="An-example-with-k-3"><a href="#An-example-with-k-3" class="headerlink" title="An example with k=3:"></a>An example with k=3:</h4><img src="/image/ml1.png" alt="KNN example" width="500" length="500"/>
+
+<h5 id="Credit-Scott-Robinson"><a href="#Credit-Scott-Robinson" class="headerlink" title="Credit: Scott Robinson"></a>Credit: Scott Robinson</h5><ul>
+<li>&quot;X&quot; is the newly introduced data point. Here you can see that with k=3, within the circle, there are 2 red training data points nearest to X and there is only 1 blue training data point. Therefore, the new data point is classified as red.</li>
+</ul>
+<h2 id="The-good-and-bad-of-KNN"><a href="#The-good-and-bad-of-KNN" class="headerlink" title="The good and bad of KNN"></a>The good and bad of KNN</h2><h3 id="The-good"><a href="#The-good" class="headerlink" title="The good"></a>The good</h3><ul>
+<li>Easy to understand and implement</li>
+<li>KNN is a <strong>lazy learning algorithm</strong>, which means that it does not require any training to make real time predictions. This then makes KNN a relatively faster algorithm. New data can also be added seamlessly as a result.</li>
+<li>Only 2 parameters are required for its implementation:<ul>
+<li>k-value</li>
+<li>distance (either Euclidean or Manhattan)</li>
+</ul>
+</li>
+</ul>
+<h3 id="The-bad"><a href="#The-bad" class="headerlink" title="The bad"></a>The bad</h3><ul>
+<li>Not good for high dimensional data. With increasing number of dimensions, it becomes increasingly difficult for the algorithm to calculate distance in each of the dimensions.</li>
+<li>High prediction cost for large datasets arising from higher cost of distance calculation.</li>
+<li>Not good for classification of categorical features. Methods of calculating distance other than Euclidean and Manhattan may be needed to apply KNN to categorical features. A discussion about it on <a href="https://stackoverflow.com/questions/13625849/knn-classification-with-categorical-data" target="_blank" rel="noopener">Stack Overflow</a>.</li>
+</ul>
+<h2 id="How-to-use-the-Python-Scikit-learn-library-for-KNN-classfication"><a href="#How-to-use-the-Python-Scikit-learn-library-for-KNN-classfication" class="headerlink" title="How to use the Python Scikit-learn library for KNN classfication"></a>How to use the Python Scikit-learn library for KNN classfication</h2><p>I used Jupyter Notebook to execute the necessary code as observed from this excellent <a href="https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/" target="_blank" rel="noopener">tutorial</a>. I made sure to make my code description as concise as possible.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to import the necessary libraries</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to set the url of the famous iris dataset source</span></span><br><span class="line">url = <span class="string">"https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># to make a list of column names to be assigned to dataframe</span></span><br><span class="line">names = [<span class="string">'sepal-length'</span>, <span class="string">'sepal-width'</span>, <span class="string">'petal-length'</span>, <span class="string">'petal-width'</span>, <span class="string">'Class'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># to read dataset to a pandas dataframe</span></span><br><span class="line">dataset = pd.read_csv(url, names=names)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to see the top 5 rows of "dataset"</span></span><br><span class="line">dataset.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal-length</th>
+      <th>sepal-width</th>
+      <th>petal-length</th>
+      <th>petal-width</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># now we want to split the dataset into its features and labels</span></span><br><span class="line">X = dataset.iloc[:, :<span class="number">-1</span>].values <span class="comment"># assigns first 4 columns to X</span></span><br><span class="line">y = dataset.iloc[:, <span class="number">4</span>].values <span class="comment"># assigns the "Class" column to y</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># to avoid over-fitting, we need to divide the dataset into TRAINING and TEST splits</span></span><br><span class="line"><span class="comment"># this would give us a better idea of how the KNN algorithm performs during the TESTING phase</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># this will split the dataset into 80% training data and 20% test data</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.20</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># it doesn't stop here</span></span><br><span class="line"><span class="comment"># feature scaling should be done next so the features can be uniformly evaluated</span></span><br><span class="line"><span class="comment"># feature scaling basically normalizes the features, enabling the gradient descent algorithm to converge faster</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">scaler.fit(X_train)</span><br><span class="line"></span><br><span class="line">X_train = scaler.transform(X_train)</span><br><span class="line">X_test = scaler.transform(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># time for training and prediction with KNN!</span></span><br><span class="line"><span class="comment"># 5 is the most commonly used value for KNN algorithm</span></span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line">classifier = KNeighborsClassifier(n_neighbors=<span class="number">5</span>)</span><br><span class="line">classifier.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to make predictions on our test data</span></span><br><span class="line">y_pred = classifier.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># now we want to evaluate our algorithm's accuracy</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report, confusion_matrix</span><br><span class="line">print(confusion_matrix(y_test, y_pred))</span><br><span class="line">print(classification_report(y_test, y_pred))</span><br><span class="line"></span><br><span class="line"><span class="comment"># the result shows that the KNN algorithm was able to classify all 30 records</span></span><br><span class="line"><span class="comment"># in the test set with pretty high accuracy.</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[11  0  0]
+ [ 0  8  1]
+ [ 0  0 10]]
+                 precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       1.00      0.89      0.94         9
+ Iris-virginica       0.91      1.00      0.95        10
+
+       accuracy                           0.97        30
+      macro avg       0.97      0.96      0.96        30
+   weighted avg       0.97      0.97      0.97        30</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># so what if other k-values would provide us with better accuracy?</span></span><br><span class="line"><span class="comment"># one way to find out the best k-value is to plot the graph of k-value</span></span><br><span class="line"><span class="comment"># and the corresponding error rate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># let's now plot the mean error for the predicted values of test set for k-values</span></span><br><span class="line"><span class="comment"># from 1 to 40</span></span><br><span class="line">error = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculating error for K values between 1 and 40</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">40</span>):</span><br><span class="line">    knn = KNeighborsClassifier(n_neighbors=i)</span><br><span class="line">    knn.fit(X_train, y_train)</span><br><span class="line">    pred_i = knn.predict(X_test)</span><br><span class="line">    error.append(np.mean(pred_i != y_test))</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># time to plot the error values against the k-values!</span></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">plt.plot(range(<span class="number">1</span>, <span class="number">40</span>), error, color=<span class="string">'red'</span>, linestyle=<span class="string">'dashed'</span>, marker=<span class="string">'o'</span>,</span><br><span class="line">         markerfacecolor=<span class="string">'blue'</span>, markersize=<span class="number">10</span>)</span><br><span class="line">plt.title(<span class="string">'Error Rate K Value'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'K Value'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Mean Error'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>Text(0, 0.5, &apos;Mean Error&apos;)</code></pre><img src="/image/ml2.png" alt="plot" width="500" length="500"/>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># we can see that the mean error is zero for k-values 25 to 29!</span></span><br><span class="line"><span class="comment"># let's try k=27 and see what we get!</span></span><br><span class="line"></span><br><span class="line">classifier = KNeighborsClassifier(n_neighbors=<span class="number">27</span>)</span><br><span class="line">classifier.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to make predictions on our test data</span></span><br><span class="line">y_pred = classifier.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># will we get a higher accuracy from using k=27?</span></span><br><span class="line">print(confusion_matrix(y_test, y_pred))</span><br><span class="line">print(classification_report(y_test, y_pred))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[11  0  0]
+ [ 0  9  0]
+ [ 0  0 10]]
+                 precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       1.00      1.00      1.00         9
+ Iris-virginica       1.00      1.00      1.00        10
+
+       accuracy                           1.00        30
+      macro avg       1.00      1.00      1.00        30
+   weighted avg       1.00      1.00      1.00        30</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># YES!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>We now know that while any k-value can be chosen to deliver a decent result, one can always make a plot of mean error against k-values to further assess the effectiveness of certain k-values. This would then enable us to get an even more accurate classification result. </p>
+<p>Even though the idea behind KNN is simple, the prediction power it offers is pretty simple. In fact, prediction making is one of the most challenging aspects of machine learning. </p>
+<p>Leaning something new by first understanding something simple has definitely helped kept my interest alive for machine learning. I  certainly hope you would feel the same way too. Shoutout to Scott Robinson for his amazing tutorial, which will be linked below.</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
+<li><a href="https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/" target="_blank" rel="noopener">K-Nearest Neighbors Algorithm in Python and Scikit-Learn</a></li>
+</ol>
+<h3 id="Possible-improvement-s"><a href="#Possible-improvement-s" class="headerlink" title="Possible improvement(s)"></a>Possible improvement(s)</h3><ul>
+<li>I will try to type my Jupyter Notebook comments in Markdown format next time! :)</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Arwin Lashawn</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/python/"># python</a>
+                    
+                        <a href="/tags/machinelearning/"># machinelearning</a>
+                    
+                        <a href="/tags/scikit-learn/"># scikit-learn</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/08/12/t10/">Introduction to Machine Learning (Python)</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Arwin Lashawn | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
