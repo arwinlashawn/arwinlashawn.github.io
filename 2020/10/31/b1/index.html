@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Arwin Lashawn">
+
+
+
+
+    <meta name="keywords" content="arwinlashawn,hexo,blog,github,tutorial,bash,arwin,lashawn">
+
+
+<title>Continuous Integration vs Continuous Deployment | Arwin Lashawn | Codes</title>
+
+
+
+    <link rel="icon" href="/avatar1.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Arwin Lashawn | Codes</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Arwin Lashawn | Codes</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Continuous Integration vs Continuous Deployment</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Arwin Lashawn</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 31, 2020&nbsp;&nbsp;14:09:54</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/blogs/">blogs</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Important-Note"><a href="#Important-Note" class="headerlink" title="Important Note"></a>Important Note</h3><p>This blog of mine was first published on the <a href="https://scoutapm.com/blog/continuous-integration-vs-continuous-deployment" target="_blank" rel="noopener">Scout APM website</a> on October 22, 2020. Be sure to check it out there if you haven&#39;t.</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><em>It all started when I was told to assist in the implementation of a CI/CD pipeline at work. One thing led to another and I was approached to write a technical blog and this was one of the available topics for me. I thought it was a great idea to take up the task because I had always wanted to know more about CI/CD and I have always enjoyed writing about stuff like this. Let&#39;s get into it.</em></p>
+<h1 id="Continuous-Integration-vs-Continuous-Deployment"><a href="#Continuous-Integration-vs-Continuous-Deployment" class="headerlink" title="Continuous Integration vs Continuous Deployment"></a>Continuous Integration vs Continuous Deployment</h1><p>Thanks to Linus Torvalds, the creator of not only Linux, but also the most popular version control system - Git, multiple developers can simultaneously work on the development of the same application, ramping up the speed of production. Git was revolutionary - it enabled developers to keep track of code changes and collaborate seamlessly across different projects. While developers have significantly benefited from Git in the software development lifecycle, there was a period when developers had to manually build, test, and stage their code before deploying it for production. </p>
+<p>Since these projects are maintained by teams consisting of a number of developers, merging, building, and testing the project after each code-update can be an arduous task. </p>
+<p>Having to do all of this manually easily increases the likelihood of bug-prone, erroneous code to crawl into production. As a result, when errors do come up, the subsequent challenge to trace the root cause of these errors can lead to a waste of resources that could have been invested in other aspects of the product. This means that a hefty amount of valuable time and money is lost in order to ensure successful code deployment. This is exactly where continuous integration and continuous deployment swoop in and save the day.</p>
+<p>In recent years, the practices of continuous integration and continuous deployment have gained tremendous popularity, due to their idea of automating the building, testing, and deployment pipelines to minimize delays in software production. While automation mainly addresses problems that may arise from merging (sometimes) faulty code from multiple collaborators on the developer side, it also improves the overall experience of the end-users and relevant stakeholders, for reasons which will be explained thoroughly below. The sheer significance of these two practices gave birth to the acronym “CI/CD”, which you may have come across. CI refers to continuous integration, while CD may refer to either continuous deployment or continuous delivery,  the former being the more common one. </p>
+<p>So what is the difference between continuous integration and continuous deployment? To put it simply, continuous integration comes before continuous deployment and therefore a system for CI should first be in place to make continuous deployment possible. While simply having just CI set up should notably increase the speed of application development, one should adopt the whole CI/CD pipeline in order to reap the maximum benefits in terms of quickly shipping bug-free, robust apps to their customers. Remember when we mentioned that “CD” may also refer to “continuous delivery”? It is actually very similar to continuous deployment. We will discuss what it exactly means and how it fits in the big picture of CI/CD below. </p>
+<h2 id="Continuous-Integration-Delivery-and-Deployment-A-Background-DevOps-Overview"><a href="#Continuous-Integration-Delivery-and-Deployment-A-Background-DevOps-Overview" class="headerlink" title="Continuous Integration, Delivery, and Deployment: A Background DevOps Overview"></a>Continuous Integration, Delivery, and Deployment: A Background DevOps Overview</h2><p>Let&#39;s take a step back in order to truly understand how CI/CD came about and what it is all about. It all began with the objective to quickly release quality products by breaking down bigger tasks into smaller ones and by tackling them with frequent iterations of planning, execution, and evaluation. Ever heard of the Agile software development approach? It was first adopted in 2000 when a group of 17 software developers in Oregon believed that they could greatly increase their efficiency in delivering reliable products based on their customers’ needs. The group of developers identified two key techniques that could be used to make Agile product deployment possible. One of these is the technique that can be optimized today by adopting the CI/CD pipeline -</p>
+<p>Shortening the delay of benefits to users in order to resolve the product-market fit and development graveyard problems. (Source)</p>
+<p>You may think that this is where CI/CD finally comes into play. Well, not quite yet. While the Agile methodology had helped many software development teams to increase their productivity based on their clients’ needs, Agile mostly benefited only the developers, but not those classified as operators, like QA Engineers and system administrators, who are responsible for driving home the finished product. You may have heard of the saying “done is better than perfect”. To get to the finish line, some sort of testing and deployment steps must be in place to deliver a finished product for the customers to give feedback about. The sooner, the better. The need to facilitate software production involving different departments inspired the rise o DevOps, starting in 2008.</p>
+<p>DevOps is a combination of two words, developers and operators. It is a fancy word that symbolizes the unification of the work of developers and operators in the software development lifecycle. The operators here can refer to the system administrators, cybersecurity experts, and others who play a vital role in ensuring the quality and security of software. Remember how the Agile approach exclusively caters to the developer’s needs? DevOps differs in this regard and aims to provide a seamless software development experience from coding all the way to production. It extends and applies the idea of efficiency to production and involves operators to achieve this - an idea that was once alien to the software development industry. This goes to show how DevOps offers not just an increase in efficiency by integrating two different departments, but rather a cultural change which has revolutionized the way a software development team operates. This is where CI/CD comes into play - it is one of the main tactics employed to achieve the goal of DevOps. Although the idea of CI/CD has been around for quite a while, the emergence and wide application of CI/CD automation tools such as Jenkins and Travis CI have shown that CI/CD is not just an option for a smooth development experience, but rather a necessity in order to remain relevant in a fast-developing tech industry.</p>
+<p>Now that you have a better idea of what CI/CD is, let us dive into what the terms below really mean and the differences among them:</p>
+<ul>
+<li>Continuous Integration</li>
+<li>Continuous Delivery</li>
+<li>Continuous Deployment</li>
+</ul>
+<h2 id="Continuous-Integration"><a href="#Continuous-Integration" class="headerlink" title="Continuous Integration"></a>Continuous Integration</h2><p>Continuous integration (CI), as its name suggests, enables continuous integration of code changes into the existing codebase, without breaking it. In other words, CI allows developers to automatically and consistently test every single code change (and ultimately the entire project) before merging it into the codebase. If any errors are spotted during the tests, the developer will immediately receive detailed feedback regarding the error, providing a quick fix to follow. Instead of waiting for the “merge day” to arrive, CI enables on-the-spot building and testing for every code change, hence increasing efficiency.</p>
+<p>To illustrate this, let’s imagine a team of two developers - John and May, working on the same app. Say John is working on the home page design of the app while May is working on the payment feature of the app. They have been working on their respective features for weeks and when they finally merge their code, they find out that it causes the app to fail. Now they need to spend quite some time to fix the issue and might even have to start their work from scratch. Now imagine a team of over a hundred developers working on the same app! Surely it will be a nightmare having to trace the source of all errors that may arise after code merging.</p>
+<h3 id="What-is-the-goal-of-continuous-integration"><a href="#What-is-the-goal-of-continuous-integration" class="headerlink" title="What is the goal of continuous integration?"></a>What is the goal of continuous integration?</h3><p>When multiple developers collaborate on a single project, it can be difficult to incorporate code changes and updates from everyone in a seamless, foolproof manner. If not taken care of, it can lead to bugs and errors that are likely to be difficult and time-consuming to fix later. This can be further aggravated by irregular testing before pushing code or merging it. With CI, developers can focus on making the necessary code changes without worrying about complications that may arise from merging the code they spent many nights working on. </p>
+<h2 id="Continuous-Delivery"><a href="#Continuous-Delivery" class="headerlink" title="Continuous Delivery"></a>Continuous Delivery</h2><p>Continuous delivery picks up where continuous integration stops, which means that CI must first be built in for continuous delivery to work its magic. I’d like to remind you again that CI ensures that any code changes done towards the existing codebase will not result in annoying bugs (provided the test cases are robust enough, of course). Following this, continuous delivery consistently automates the release of the final code to a repository. This ensures that the important branches are always in a releasable state, making it easier for the relevant stakeholders or board of approval to approve them for production. </p>
+<p>Note that it isn’t always the master branch of a repository that should be in a releasable state - many companies typically adopt the branch-per-issue workflow which requires some branches other than the master branch to also be in a ready-to-deploy state. </p>
+<h3 id="What-is-the-goal-of-continuous-delivery"><a href="#What-is-the-goal-of-continuous-delivery" class="headerlink" title="What is the goal of continuous delivery?"></a>What is the goal of continuous delivery?</h3><p>The goal of continuous delivery is to automatically follow up on continuous integration by releasing successfully tested code changes to a repository. As a result, the code in these repositories will always be in a deployable state and any related feedback will be based on the finalized look of the product. With continuous delivery, comes in the option to manage the versioning of releases, which we will not be covering here. If you want to know more about versioning, read this. Now let’s look at what continuous deployment is -</p>
+<h2 id="Continuous-Deployment"><a href="#Continuous-Deployment" class="headerlink" title="Continuous Deployment"></a>Continuous Deployment</h2><p>Continuous deployment is essentially an extended version of continuous delivery - it automates the pipeline from the end of continuous integration to development. This may be especially useful in a setting where you are working in a small team, on a project that does not require any manual approval before releasing the code for production. Such a setting allows feedback and worthy suggestions from end-users to reflect in the app as soon as possible. However, since there is no need for manual approval and verification, successful deployment depends heavily on robustly designed automated testing suites. </p>
+<h3 id="What-is-the-goal-of-continuous-deployment"><a href="#What-is-the-goal-of-continuous-deployment" class="headerlink" title="What is the goal of continuous deployment?"></a>What is the goal of continuous deployment?</h3><p>Continuous deployment dramatically cuts the time required to manually deploy the final product. As soon as the code changes have been tested and released to the repository, the code is deployed and the corresponding changes can be seen almost instantly by users all over the world. Feedback from the users can then be obtained quickly, prompting the developers to make the necessary changes to appease their requirements. This is one aspect in which smaller companies might have an edge over bigger companies, provided they have an appropriate CI/CD pipeline set up - they can cater to their clients’ needs faster as smaller companies typically focus their resources on a smaller set of products.</p>
+<p>Now that you have a much better understanding of what each of the three terms means, let’s take a closer look at the differences between continuous integration and continuous deployment. </p>
+<h2 id="Continuous-Integration-vs-Continuous-Deployment-1"><a href="#Continuous-Integration-vs-Continuous-Deployment-1" class="headerlink" title="Continuous Integration vs. Continuous Deployment"></a>Continuous Integration vs. Continuous Deployment</h2><p>Continuous integration assumes that you have a version control system already implemented such as Git or Mercurial, to begin with. With an existing version control system, you can use continuous integration to automate the building and testing of code changes. This ensures that after incorporating the many changes from different developers, your final code does not break. </p>
+<p>Only after this stage, does continuous deployment come into the picture. It takes care of automatically deploying the merged code into production, as a result of which, your end-users can observe the changes soon after the code changes have been pushed.</p>
+<h2 id="Continuous-Integration-vs-Continuous-Delivery"><a href="#Continuous-Integration-vs-Continuous-Delivery" class="headerlink" title="Continuous Integration vs. Continuous Delivery"></a>Continuous Integration vs. Continuous Delivery</h2><p>Like continuous deployment, continuous delivery also comes after continuous integration. While continuous integration automatically builds and tests your code to ensure a bug-free final codebase, continuous delivery ensures your tested code changes are released into a specific repository. This is where your code stays, ready to be deployed, waiting to be approved by the members in charge before launching it into production. Having repositories in a readily deployable state ensures that any related discussion is based on the finalized look of the product and not that of a product in the making. </p>
+<p>How to Reduce Costs During the Software Development Lifecycle<br>The CI/CD pipeline described above is already capable of cutting a huge fraction of the time and costs that need to be invested in the software development lifecycle. An even further reduction in the cost is possible by two means -</p>
+<ul>
+<li>By adopting the Agile methodology</li>
+<li>By using an Application Performance Monitoring (APM) tool </li>
+</ul>
+<h2 id="Agile-Development"><a href="#Agile-Development" class="headerlink" title="Agile Development"></a>Agile Development</h2><p>More and more companies are adopting the Agile development approach today. Why? Because it is a result-oriented approach that breaks down tasks into smaller, manageable chunks. Being highly iterative, it encourages frequent inspection and adjustments which contribute to faster results. This is perfect for meeting client&#39; dynamic needs, while also benefiting the company by achieving more goals in a shorter span of time. Hence, the Agile approach is one option you can consider to reduce the cost of your software development lifecycle.</p>
+<h2 id="Application-Performance-Monitoring-APM-tools"><a href="#Application-Performance-Monitoring-APM-tools" class="headerlink" title="Application Performance Monitoring (APM) tools"></a>Application Performance Monitoring (APM) tools</h2><p>So what exactly is Application Performance Monitoring and how does it help in cutting costs? An APM tool allows you to observe real-time performance metrics of your application as users interact with it, enabling you to continuously optimize your application as you discover issues that are limiting performance.</p>
+<p>Reports generated by APM tools can be used to localize and debug parts of your application that need immediate attention. Instead of having to wait for customers’ feedback, developers can now simply rely on these reports to figure out what needs to be optimized, and where. With these quick improvements, thanks to the handy reports, you are more likely to not only expand your user base but also reduce costs by quickly figuring out exactly what parts of your application need to be addressed and improved in future updates.</p>
+<p>You can take this to the next level by using proficient application monitoring (APM) tools like ScoutAPM to constructively analyze and optimize your website’s performance. ScoutAPM gives you real-time insight so you can quickly pinpoint &amp; resolve issues before the customer ever sees them. </p>
+<h2 id="Closing-Thoughts"><a href="#Closing-Thoughts" class="headerlink" title="Closing Thoughts"></a>Closing Thoughts</h2><p>Hopefully, you are now able to see why CI/CD is extremely important in the software development lifecycle. Continuous integration, continuous delivery, and continuous deployment all show the sheer power of automation. It not only streamlines tasks between the development and operations departments, but also significantly reduces the time taken between writing lines of code all the way up to shipping the end-product to the users. </p>
+<p>The main difference between continuous integration, continuous delivery, and continuous deployment really lies in their stages in the whole pipeline - continuous integration automates building and testing of code, followed by continuous delivery, which releases the changes into a repository which can be assessed for further actions. Continuous deployment is an extended process of continuous delivery; it also picks up where continuous integration ends and is responsible for automating deployment all the way up to production. </p>
+<p>By leveraging CI/CD tools such as Jenkins, Travis CI, and others, many organizations today are able to accelerate the production of their software products. The best part about some of these tools is that they are free and open source. I would recommend you to play around with some of these and see the magic for yourself. : )</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ol>
+<li><a href="https://www.planview.com/resources/guide/agile-methodologies-a-beginners-guide/history-of-agile/#:~:text=It%20all%20started%20in%20the,new%20software%20to%20market%20faster." target="_blank" rel="noopener">The History of Agile</a></li>
+<li><a href="https://stackify.com/continuous-delivery-vs-continuous-deployment-vs-continuous-integration/" target="_blank" rel="noopener">Dev Leaders Compare Continuous Delivery vs. Continuous Deployment vs. Continuous Integration</a></li>
+<li><a href="https://www.redhat.com/en/topics/devops/what-is-ci-cd" target="_blank" rel="noopener">What is CI/CD?</a></li>
+<li><a href="https://www.appknox.com/blog/history-of-devops#:~:text=The%20concept%20of%20DevOps%20emerged,it%20became%20quite%20a%20buzzword." target="_blank" rel="noopener">Roadway to IT Revolution: The History of DevOps<br>Read more at: https://www.appknox.com/blog/history-of-devops</a></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Arwin Lashawn</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/continuous-integration/"># continuous integration</a>
+                    
+                        <a href="/tags/continuous-delivery/"># continuous delivery</a>
+                    
+                        <a href="/tags/continuous-deployment/"># continuous deployment</a>
+                    
+                        <a href="/tags/ci-cd/"># ci/cd</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/08/22/t0/">Blog Setup Tutorial ft. GitHub and Hexo</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Arwin Lashawn | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
